@@ -39,61 +39,87 @@
         }
         .hero h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
         
-        .projects-section {
-            max-width: 1200px;
-            margin: -3rem auto 0;
-            padding: 2rem;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        /* =========================================
+           NOUVELLE STRUCTURE IMBRIQUÉE (ACCORDÉONS)
+           ========================================= */
+        .projects-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 1rem;
         }
-        
-        .card {
+
+        /* La grande case Projet */
+        .projet-box {
             background: white;
             border-radius: 12px;
-            overflow: hidden;
-            width: 280px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.2s;
-            cursor: pointer;
+            margin-bottom: 2rem;
+            overflow: hidden;
         }
-        .card:hover { transform: translateY(-5px); }
-        .card-header { padding: 2rem 1.5rem; color: white; }
-        .card-header h3 { margin: 0 0 0.5rem 0; font-size: 1.4rem; }
-        .card-header p { margin: 0; font-size: 0.9rem; opacity: 0.9; }
-        
+
+        .projet-header {
+            padding: 2rem;
+            color: white;
+        }
+        .projet-header h2 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
+        .projet-header p { margin: 0; font-size: 1.05rem; opacity: 0.9; }
+
         .p1 { background-color: var(--bleu-hist); }
         .p2 { background-color: var(--vert-debat); }
         .p3 { background-color: var(--orange-appel); }
         .p4 { background-color: var(--violet-fant); }
-        
-        .card-body { padding: 1.5rem; font-size: 0.9rem; color: #475569; }
-        .btn-explorer { color: var(--vert-debat); text-decoration: none; font-weight: bold; }
 
-        /* =========================================
-           NOUVEAU CSS POUR LES SÉQUENCES ET RUBRIQUES 
-           ========================================= */
-        .sequence-section {
-            max-width: 800px;
-            margin: 3rem auto;
+        .projet-content {
             padding: 2rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* L'accordéon Séquence */
+        details.sequence-details {
+            margin-bottom: 1.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background-color: #f1f5f9;
+        }
+        details.sequence-details:last-child {
+            margin-bottom: 0;
         }
         
-        .sequence-title {
-            color: var(--bleu-hist);
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+        details.sequence-details > summary {
+            padding: 1.2rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--texte);
+            cursor: pointer;
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: background-color 0.2s;
+        }
+        details.sequence-details > summary:hover {
+            background-color: #f8fafc;
+        }
+        details.sequence-details > summary::-webkit-details-marker { display: none; }
+        details.sequence-details > summary::after {
+            content: "▼";
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        details.sequence-details[open] > summary::after { content: "▲"; }
+        details.sequence-details[open] > summary {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 1px solid #cbd5e1;
         }
 
-        /* Style des boîtes déroulantes */
+        .sequence-body {
+            padding: 1.5rem;
+        }
+
+        /* Les sous-accordéons Rubriques (existants) */
         details.rubrique {
             margin-bottom: 1rem;
             border: 1px solid #e2e8f0;
@@ -101,61 +127,54 @@
             overflow: hidden;
             background-color: white;
         }
+        details.rubrique:last-child {
+            margin-bottom: 0;
+        }
         
-        /* Style de la barre cliquable */
-        details.rubrique summary {
+        details.rubrique > summary {
             padding: 1rem 1.5rem;
             font-weight: 600;
             cursor: pointer;
-            list-style: none; /* Cache la flèche par défaut */
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #f8fafc;
+            background-color: #ffffff;
             transition: background-color 0.2s;
         }
         
-        details.rubrique summary:hover {
-            background-color: #f1f5f9;
-        }
-
-        /* Cache la flèche sur Safari */
-        details.rubrique summary::-webkit-details-marker {
-            display: none;
-        }
-        
-        /* Ajout d'une flèche personnalisée à droite */
-        details.rubrique summary::after {
+        details.rubrique > summary:hover { background-color: #f8fafc; }
+        details.rubrique > summary::-webkit-details-marker { display: none; }
+        details.rubrique > summary::after {
             content: "▼";
             font-size: 0.8rem;
-            color: #64748b;
+            color: #cbd5e1;
         }
-        details.rubrique[open] summary::after {
-            content: "▲";
+        details.rubrique[open] > summary::after { content: "▲"; }
+
+        .icon-text {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        /* Couleurs des bordures gauches selon la rubrique */
-        .rub-lancement summary { border-left: 4px solid #3b82f6; } /* Bleu */
-        .rub-eval summary { border-left: 4px solid #ef4444; }      /* Rouge */
-        .rub-oral summary { border-left: 4px solid #10b981; }      /* Vert */
-        .rub-ecrit summary { border-left: 4px solid #f59e0b; }     /* Jaune */
+        /* Couleurs pour les 7 rubriques */
+        .rub-lancement > summary { border-left: 4px solid #8b5cf6; }
+        .rub-eval > summary { border-left: 4px solid #fb923c; }
+        .rub-co > summary { border-left: 4px solid #38bdf8; }
+        .rub-po > summary { border-left: 4px solid #2dd4bf; }
+        .rub-ce > summary { border-left: 4px solid #94a3b8; }
+        .rub-pe > summary { border-left: 4px solid #f43f5e; }
+        .rub-remed > summary { border-left: 4px solid #fbbf24; }
 
-        /* Style du contenu une fois ouvert */
         .contenu-ressources {
             padding: 1.5rem;
             border-top: 1px solid #e2e8f0;
+            background-color: #f8fafc;
         }
-        .contenu-ressources ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .contenu-ressources li {
-            margin-bottom: 0.8rem;
-        }
-        .contenu-ressources li:last-child {
-            margin-bottom: 0;
-        }
+        .contenu-ressources ul { list-style-type: none; padding: 0; margin: 0; }
+        .contenu-ressources li { margin-bottom: 0.8rem; }
+        .contenu-ressources li:last-child { margin-bottom: 0; }
         .contenu-ressources a {
             text-decoration: none;
             color: #334155;
@@ -167,14 +186,10 @@
             transition: background-color 0.2s;
         }
         .contenu-ressources a:hover {
-            background-color: #f1f5f9;
+            background-color: white;
             color: var(--bleu-hist);
         }
-        /* Icône PDF stylisée */
-        .pdf-icon {
-            color: #ef4444;
-            font-weight: bold;
-        }
+        .pdf-icon { color: #ef4444; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -192,96 +207,141 @@
         <p>Ressources pédagogiques structurées par projet et par compétence pour les enseignants de français en Algérie.</p>
     </section>
 
-    <main class="projects-section">
-        <article class="card">
-            <div class="card-header p1">
-                <h3>Projet 01</h3>
-                <p>Textes et documents d'histoire</p>
-            </div>
-            <div class="card-body">
-                <p>Explorer les textes historiques, analyser les documents d'archives et comprendre les enjeux de la mémoire collective.</p>
-                <a href="#sequence-demo" class="btn-explorer">Voir les séquences →</a>
-            </div>
-        </article>
-        <article class="card">
-            <div class="card-header p2">
-                <h3>Projet 02</h3>
-                <p>Le débat d'idées</p>
-            </div>
-            <div class="card-body">
-                <p>Maîtriser les techniques argumentatives, développer l'esprit critique et structurer un discours persuasif.</p>
-                <a href="#" class="btn-explorer">Voir les séquences →</a>
-            </div>
-        </article>
-        <article class="card">
-            <div class="card-header p3">
-                <h3>Projet 03</h3>
-                <p>L'appel</p>
-            </div>
-            <div class="card-body">
-                <p>Comprendre et produire des textes exhortatifs pour inciter à l'action.</p>
-                <a href="#" class="btn-explorer">Voir les séquences →</a>
-            </div>
-        </article>
-        <article class="card">
-            <div class="card-header p4">
-                <h3>Projet 04</h3>
-                <p>La nouvelle fantastique</p>
-            </div>
-            <div class="card-body">
-                <p>Découvrir les caractéristiques du fantastique et produire une nouvelle originale.</p>
-                <a href="#" class="btn-explorer">Voir les séquences →</a>
-            </div>
-        </article>
-    </main>
+    <main class="projects-container">
 
-    <section id="sequence-demo" class="sequence-section">
-        
-        <div class="sequence-title">
-            <h2>Séquence 01</h2>
-            <span style="font-size: 0.9rem; color: #64748b;">Projet 01</span>
+        <!-- =========================================
+             PROJET 01 : Textes et documents d'histoire
+             ========================================= -->
+        <div class="projet-box">
+            <div class="projet-header p1">
+                <h2>Projet 01 : Textes et documents d'histoire</h2>
+                <p>Explorer les textes historiques, analyser les documents d'archives et comprendre les enjeux de la mémoire collective.</p>
+            </div>
+            
+            <div class="projet-content">
+                <!-- SÉQUENCE 01 -->
+                <details class="sequence-details">
+                    <summary>Séquence 01 : Informer d'un fait d'histoire de manière objective</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
+
+                <!-- SÉQUENCE 02 -->
+                <details class="sequence-details">
+                    <summary>Séquence 02 : Présenter un fait d'histoire (commentaires/témoignages)</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
+            </div>
         </div>
 
-        <details class="rubrique rub-lancement">
-            <summary>Lancement du projet</summary>
-            <div class="contenu-ressources">
-                <ul>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Contrat d'apprentissage.pdf</a></li>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Présentation globale du projet.pdf</a></li>
-                </ul>
+        <!-- =========================================
+             PROJET 02 : Le débat d'idées
+             ========================================= -->
+        <div class="projet-box">
+            <div class="projet-header p2">
+                <h2>Projet 02 : Le débat d'idées</h2>
+                <p>Maîtriser les techniques argumentatives, développer l'esprit critique et structurer un discours persuasif.</p>
             </div>
-        </details>
+            
+            <div class="projet-content">
+                <!-- SÉQUENCE 01 -->
+                <details class="sequence-details">
+                    <summary>Séquence 01 : Produire un texte pour convaincre ou persuader</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
 
-        <details class="rubrique rub-eval">
-            <summary>Évaluation diagnostique</summary>
-            <div class="contenu-ressources">
-                <ul>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Support d'évaluation.pdf</a></li>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Grille de correction.pdf</a></li>
-                </ul>
+                <!-- SÉQUENCE 02 -->
+                <details class="sequence-details">
+                    <summary>Séquence 02 : Produire un texte pour concéder et réfuter</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
             </div>
-        </details>
+        </div>
 
-        <details class="rubrique rub-oral">
-            <summary>Compréhension de l'oral</summary>
-            <div class="contenu-ressources">
-                <ul>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Fiche pédagogique - Séance 1.pdf</a></li>
-                </ul>
+        <!-- =========================================
+             PROJET 03 : L'appel
+             ========================================= -->
+        <div class="projet-box">
+            <div class="projet-header p3">
+                <h2>Projet 03 : L'appel</h2>
+                <p>Comprendre et produire des textes exhortatifs pour inciter à l'action.</p>
             </div>
-        </details>
-
-        <details class="rubrique rub-ecrit">
-            <summary>Compréhension de l'écrit</summary>
-            <div class="contenu-ressources">
-                <ul>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Support texte 1.pdf</a></li>
-                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Questionnaire de lecture.pdf</a></li>
-                </ul>
+            
+            <div class="projet-content">
+                <!-- SÉQUENCE UNIQUE -->
+                <details class="sequence-details">
+                    <summary>Séquence unique : Produire un texte pour inciter le destinataire à agir</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
             </div>
-        </details>
+        </div>
 
-    </section>
+        <!-- =========================================
+             PROJET 04 : La nouvelle fantastique
+             ========================================= -->
+        <div class="projet-box">
+            <div class="projet-header p4">
+                <h2>Projet 04 : La nouvelle fantastique</h2>
+                <p>Découvrir les caractéristiques du fantastique et produire une nouvelle originale.</p>
+            </div>
+            
+            <div class="projet-content">
+                <!-- SÉQUENCE UNIQUE -->
+                <details class="sequence-details">
+                    <summary>Séquence unique : Produire un récit fantastique</summary>
+                    <div class="sequence-body">
+                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+    </main>
 
     <script>
       if (window.netlifyIdentity) {

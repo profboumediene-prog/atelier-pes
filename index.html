@@ -814,7 +814,7 @@ function buildCompetences(type, style) {
     {
       key: 'lancement', label: '🚀 Lancement', icon: '🚀',
       fiches: [
-        { badge: 'prof', label: 'Fiche pédagogique', title: `Lancement du projet — ${type}`, desc: 'onclick="f.path ? window.open(f.path,'_blank') : showToast('Fichier bientôt disponible')">⬇ Télécharger
+        { badge: 'prof', label: 'Fiche pédagogique', title: `Lancement du projet — ${type}`, desc: 'Mise en situation, contrat didactique, présentation de la tâche finale.' },
         { badge: 'eleve', label: 'Fiche apprenant', title: 'Fiche de lancement élève', desc: 'Découverte du projet, anticipation et remue-méninges guidé.' }
       ]
     },
@@ -976,7 +976,7 @@ function renderAllComps(s, accent) {
             </div>
             <div class="fiche-foot">
               <span class="fiche-meta">PDF • Prêt à l'emploi</span>
-              <button class="btn-dl" onclick="f.path ? window.open(f.path,'_blank') : showToast('Fichier bientôt disponible')">⬇ Télécharger</button>
+              <button class="btn-dl" onclick="showToast('Téléchargement : ${f.title.replace(/'/g, ' ')}')">⬇ Télécharger</button>
             </div>
           </div>
         `).join('')}

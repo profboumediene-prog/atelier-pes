@@ -976,7 +976,7 @@ function renderAllComps(s, accent) {
             </div>
             <div class="fiche-foot">
               <span class="fiche-meta">PDF • Prêt à l'emploi</span>
-              <button class="btn-dl" onclick="this.dataset.path ? window.open(this.dataset.path,'_blank') : showToast('Fichier bientôt disponible')" data-path="${f.path || ''}">⬇ Télécharger</button>
+              <button class="btn-dl" onclick="openPDF('${f.path || ''}')">⬇ Télécharger</button>
             </div>
           </div>
         `).join('')}
@@ -1043,6 +1043,7 @@ function closeModal(e) {
 }
 
 let toastTimer;
+function openPDF(path) { if (path) { window.open(path, '_blank'); } else { showToast('Fichier bientôt disponible'); } }
 function showToast(msg) {
   const t = document.getElementById('toast');
   document.getElementById('toast-msg').textContent = msg;

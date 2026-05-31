@@ -1,358 +1,1055 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'Atelier des PES de Français - Niveau 3AS</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <style>
-        :root {
-            --bleu-hist: #1a3673;
-            --vert-debat: #0fa968;
-            --orange-appel: #d97706;
-            --violet-fant: #8b5cf6;
-            --fond: #f8fafc;
-            --texte: #1e293b;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            background-color: var(--fond);
-            color: var(--texte);
-        }
-        header {
-            background-color: #041434;
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo-text h1 { margin: 0; font-size: 1.2rem; }
-        .logo-text p { margin: 0; font-size: 0.8rem; color: #94a3b8; }
-        
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a, #0f172a);
-            color: white;
-            text-align: center;
-            padding: 4rem 1rem;
-        }
-        .hero h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        
-        /* =========================================
-           NOUVELLE STRUCTURE IMBRIQUÉE (ACCORDÉONS)
-           ========================================= */
-        .projects-container {
-            max-width: 900px;
-            margin: 3rem auto;
-            padding: 0 1rem;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Atelier des PES — 3ème Année Secondaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --navy-mid: #112240;
+    --navy-light: #1a3a5c;
+    --emerald: #00c896;
+    --emerald-dim: #00a87a;
+    --gold: #f5a623;
+    --gold-light: #ffc85a;
+    --violet: #7c3aed;
+    --coral: #e85d4a;
+    --white: #f8f9fc;
+    --muted: #8899aa;
+    --card-bg: #0f1e35;
+    --border: rgba(0,200,150,0.15);
+  }
 
-        /* La grande case Projet */
-        .projet-box {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .projet-header {
-            padding: 2rem;
-            color: white;
-        }
-        .projet-header h2 { margin: 0 0 0.5rem 0; font-size: 1.8rem; }
-        .projet-header p { margin: 0; font-size: 1.05rem; opacity: 0.9; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-        .p1 { background-color: var(--bleu-hist); }
-        .p2 { background-color: var(--vert-debat); }
-        .p3 { background-color: var(--orange-appel); }
-        .p4 { background-color: var(--violet-fant); }
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--emerald-dim); border-radius: 3px; }
 
-        .projet-content {
-            padding: 2rem;
-        }
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
 
-        /* L'accordéon Séquence */
-        details.sequence-details {
-            margin-bottom: 1.5rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            background-color: #f1f5f9;
-        }
-        details.sequence-details:last-child {
-            margin-bottom: 0;
-        }
-        
-        details.sequence-details > summary {
-            padding: 1.2rem 1.5rem;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--texte);
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: background-color 0.2s;
-        }
-        details.sequence-details > summary:hover {
-            background-color: #f8fafc;
-        }
-        details.sequence-details > summary::-webkit-details-marker { display: none; }
-        details.sequence-details > summary::after {
-            content: "▼";
-            font-size: 0.9rem;
-            color: #94a3b8;
-        }
-        details.sequence-details[open] > summary::after { content: "▲"; }
-        details.sequence-details[open] > summary {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom: 1px solid #cbd5e1;
-        }
+  .logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .logo-badge {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-dim));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 18px; color: var(--navy);
+  }
+  .logo-text { line-height: 1.2; }
+  .logo-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--white); }
+  .logo-sub { font-size: 11px; color: var(--emerald); letter-spacing: 0.05em; }
 
-        .sequence-body {
-            padding: 1.5rem;
-        }
+  nav { display: flex; align-items: center; gap: 4px; }
+  nav a, nav button {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--muted); padding: 6px 14px; border-radius: 8px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  nav a:hover, nav button:hover { color: var(--white); background: rgba(255,255,255,0.07); }
+  nav a.active, nav button.active { color: var(--emerald); background: rgba(0,200,150,0.1); }
 
-        /* Les sous-accordéons Rubriques (existants) */
-        details.rubrique {
-            margin-bottom: 1rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: white;
-        }
-        details.rubrique:last-child {
-            margin-bottom: 0;
-        }
-        
-        details.rubrique > summary {
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #ffffff;
-            transition: background-color 0.2s;
-        }
-        
-        details.rubrique > summary:hover { background-color: #f8fafc; }
-        details.rubrique > summary::-webkit-details-marker { display: none; }
-        details.rubrique > summary::after {
-            content: "▼";
-            font-size: 0.8rem;
-            color: #cbd5e1;
-        }
-        details.rubrique[open] > summary::after { content: "▲"; }
+  /* ── VIEWS ── */
+  .view { display: none; animation: fadeIn 0.35s ease; }
+  .view.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
 
-        .icon-text {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+  /* ══════════════════════════════════
+     HOME VIEW
+  ══════════════════════════════════ */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background: 
+      radial-gradient(ellipse 60% 50% at 20% 60%, rgba(0,200,150,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 30%, rgba(124,58,237,0.06) 0%, transparent 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.04;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25);
+    color: var(--emerald); font-size: 12px; font-weight: 600;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 1.5rem;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--white); margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .hero h1 span { color: var(--emerald); }
+  .hero p {
+    font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-dim));
+    color: var(--navy); font-weight: 700; font-size: 14px;
+    padding: 12px 28px; border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,200,150,0.3); }
+  .btn-secondary {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    color: var(--white); font-weight: 600; font-size: 14px;
+    padding: 12px 28px; border-radius: 10px; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
-        /* Couleurs pour les 7 rubriques */
-        .rub-lancement > summary { border-left: 4px solid #8b5cf6; }
-        .rub-eval > summary { border-left: 4px solid #fb923c; }
-        .rub-co > summary { border-left: 4px solid #38bdf8; }
-        .rub-po > summary { border-left: 4px solid #2dd4bf; }
-        .rub-ce > summary { border-left: 4px solid #94a3b8; }
-        .rub-pe > summary { border-left: 4px solid #f43f5e; }
-        .rub-remed > summary { border-left: 4px solid #fbbf24; }
+  /* STATS BAR */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 0;
+    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    padding: 1.5rem 2rem; flex-wrap: wrap;
+  }
+  .stat {
+    padding: 0.5rem 2.5rem; text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--emerald); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
 
-        .contenu-ressources {
-            padding: 1.5rem;
-            border-top: 1px solid #e2e8f0;
-            background-color: #f8fafc;
-        }
-        .contenu-ressources ul { list-style-type: none; padding: 0; margin: 0; }
-        .contenu-ressources li { margin-bottom: 0.8rem; }
-        .contenu-ressources li:last-child { margin-bottom: 0; }
-        .contenu-ressources a {
-            text-decoration: none;
-            color: #334155;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 6px;
-            transition: background-color 0.2s;
-        }
-        .contenu-ressources a:hover {
-            background-color: white;
-            color: var(--bleu-hist);
-        }
-        .pdf-icon { color: #ef4444; font-weight: bold; }
-    </style>
+  /* PROJECTS SECTION */
+  .section { padding: 3.5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-head { margin-bottom: 2rem; }
+  .section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; }
+  .section-head p { color: var(--muted); margin-top: 6px; font-size: 14px; }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    cursor: pointer; transition: all 0.3s;
+    position: relative;
+  }
+  .project-card:hover { transform: translateY(-5px); border-color: rgba(0,200,150,0.4); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .project-card-top {
+    padding: 1.4rem 1.4rem 1rem;
+    position: relative;
+  }
+  .project-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem; font-weight: 900; line-height: 1;
+    opacity: 0.08; position: absolute; right: 16px; top: 12px;
+    color: var(--white);
+  }
+  .project-icon {
+    width: 42px; height: 42px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin-bottom: 1rem;
+  }
+  .project-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; line-height: 1.3; }
+  .project-card p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .project-card-foot {
+    padding: 0.9rem 1.4rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .seq-count { font-size: 11px; color: var(--muted); }
+  .arrow-link { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+  .project-card:hover .arrow-link { gap: 8px; }
+
+  /* COLOR VARIANTS */
+  .proj-1 .project-icon { background: rgba(0,200,150,0.12); }
+  .proj-1 .arrow-link { color: var(--emerald); }
+  .proj-2 .project-icon { background: rgba(245,166,35,0.12); }
+  .proj-2 .arrow-link { color: var(--gold); }
+  .proj-3 .project-icon { background: rgba(232,93,74,0.12); }
+  .proj-3 .arrow-link { color: var(--coral); }
+  .proj-4 .project-icon { background: rgba(124,58,237,0.12); }
+  .proj-4 .arrow-link { color: #a78bfa; }
+
+  /* QUICK ACCESS */
+  .quick-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
+  .quick-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem;
+    cursor: pointer; transition: all 0.25s;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .quick-card:hover { border-color: rgba(0,200,150,0.3); transform: translateY(-2px); }
+  .quick-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .quick-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+  .quick-card p { font-size: 11px; color: var(--muted); }
+
+  /* ══════════════════════════════════
+     PROJECT VIEW
+  ══════════════════════════════════ */
+  .proj-header {
+    padding: 3rem 2rem 2.5rem;
+    position: relative; overflow: hidden;
+  }
+  .proj-header::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,200,150,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--muted); margin-bottom: 1.2rem; }
+  .breadcrumb a { color: var(--emerald); text-decoration: none; cursor: pointer; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { opacity: 0.4; }
+  .proj-header h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; margin-bottom: 0.6rem; }
+  .proj-header p { color: var(--muted); font-size: 14px; max-width: 600px; line-height: 1.7; }
+  
+  .proj-body { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
+
+  /* SEQUENCES */
+  .seq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-bottom: 2.5rem; }
+  .seq-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    cursor: pointer; transition: all 0.25s;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .seq-card:hover { border-color: rgba(0,200,150,0.35); transform: translateY(-3px); }
+  .seq-num-badge {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700;
+    color: var(--emerald); flex-shrink: 0;
+  }
+  .seq-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .seq-info p { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 10px; }
+  .seq-meta { display: flex; gap: 10px; }
+  .chip {
+    font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 50px;
+    background: rgba(0,200,150,0.1); color: var(--emerald); border: 1px solid rgba(0,200,150,0.2);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+
+  /* RESOURCES TABLE */
+  .res-section { margin-bottom: 2.5rem; }
+  .res-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+  .res-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; transition: all 0.2s;
+  }
+  .res-card:hover { border-color: rgba(0,200,150,0.3); }
+  .res-info { display: flex; align-items: center; gap: 10px; }
+  .res-icon { font-size: 18px; }
+  .res-name { font-size: 13px; font-weight: 500; }
+  .res-type { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+  .btn-dl {
+    background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25);
+    color: var(--emerald); font-size: 11px; font-weight: 600;
+    padding: 5px 12px; border-radius: 7px; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.2s;
+    white-space: nowrap; display: flex; align-items: center; gap: 4px;
+  }
+  .btn-dl:hover { background: rgba(0,200,150,0.2); }
+  .btn-dl-gold {
+    background: rgba(245,166,35,0.1); border: 1px solid rgba(245,166,35,0.25);
+    color: var(--gold);
+  }
+  .btn-dl-gold:hover { background: rgba(245,166,35,0.2); }
+
+  /* ══════════════════════════════════
+     SEQUENCE VIEW
+  ══════════════════════════════════ */
+  .competences-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(15,30,53,0.6); backdrop-filter: blur(8px);
+    position: sticky; top: 64px; z-index: 50;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: none; border: 1px solid transparent; cursor: pointer;
+    font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 600;
+    color: var(--muted); padding: 6px 14px; border-radius: 8px; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--white); border-color: var(--border); }
+  .tab-btn.active { color: var(--emerald); background: rgba(0,200,150,0.1); border-color: rgba(0,200,150,0.25); }
+
+  .competence-block { padding: 2rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .comp-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+  }
+  .comp-icon { font-size: 24px; }
+  .comp-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; }
+  .comp-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .fiches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .fiche-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; transition: all 0.25s;
+  }
+  .fiche-card:hover { border-color: rgba(0,200,150,0.3); transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+  .fiche-top { padding: 1.2rem; }
+  .fiche-badge {
+    display: inline-block; font-size: 9px; font-weight: 700;
+    padding: 3px 9px; border-radius: 50px; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 10px;
+  }
+  .badge-prof { background: rgba(0,200,150,0.15); color: var(--emerald); border: 1px solid rgba(0,200,150,0.2); }
+  .badge-eleve { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
+  .badge-eval { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.2); }
+  .badge-officiel { background: rgba(232,93,74,0.15); color: var(--coral); border: 1px solid rgba(232,93,74,0.2); }
+
+  .fiche-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
+  .fiche-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .fiche-foot {
+    padding: 0.8rem 1.2rem; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .fiche-meta { font-size: 11px; color: var(--muted); }
+
+  /* ══════════════════════════════════
+     DOCS OFFICIELS VIEW
+  ══════════════════════════════════ */
+  .docs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .doc-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    display: flex; gap: 14px; align-items: flex-start;
+    cursor: pointer; transition: all 0.25s;
+  }
+  .doc-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-3px); }
+  .doc-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+  .doc-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+  .doc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+
+  /* EVALS VIEW */
+  .eval-types { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .eval-type-btn {
+    background: var(--card-bg); border: 1px solid var(--border);
+    color: var(--muted); font-size: 13px; font-weight: 600;
+    padding: 8px 18px; border-radius: 10px; cursor: pointer;
+    font-family: 'Outfit', sans-serif; transition: all 0.2s;
+  }
+  .eval-type-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(245,166,35,0.08); }
+  .eval-type-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+
+  .evals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .eval-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden; transition: all 0.25s;
+  }
+  .eval-card:hover { border-color: rgba(245,166,35,0.3); transform: translateY(-3px); }
+  .eval-top { padding: 1.2rem 1.4rem 0.8rem; }
+  .eval-tag {
+    font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; display: inline-block;
+  }
+  .tag-devoir { background: rgba(245,166,35,0.15); color: var(--gold); border: 1px solid rgba(245,166,35,0.2); }
+  .tag-compo { background: rgba(232,93,74,0.15); color: var(--coral); border: 1px solid rgba(232,93,74,0.2); }
+  .tag-test { background: rgba(124,58,237,0.15); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
+  .eval-title { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .eval-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .eval-foot { padding: 0.8rem 1.4rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .eval-proj { font-size: 11px; color: var(--muted); }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--navy-mid); border: 1px solid var(--border);
+    border-radius: 20px; padding: 2rem; max-width: 480px; width: 100%;
+    position: relative; animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity:0; transform:scale(0.95) translateY(20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+  .modal-close {
+    position: absolute; top: 14px; right: 14px;
+    background: rgba(255,255,255,0.08); border: none; cursor: pointer;
+    color: var(--muted); width: 30px; height: 30px; border-radius: 8px;
+    font-size: 16px; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.14); color: var(--white); }
+  .modal h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .modal p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .modal-actions { display: flex; gap: 10px; }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--navy-mid); border: 1px solid var(--emerald);
+    color: var(--white); padding: 12px 20px; border-radius: 12px;
+    font-size: 13px; font-weight: 500; z-index: 300;
+    display: flex; align-items: center; gap: 8px;
+    transition: transform 0.3s; pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast-icon { color: var(--emerald); font-size: 16px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border); padding: 2rem;
+    text-align: center; font-size: 12px; color: var(--muted);
+    margin-top: 2rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { display: none; }
+    .stat { padding: 0.5rem 1.2rem; }
+    .competences-tabs { top: 64px; }
+  }
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-text">
-            <h1>L'Atelier des PES de Français</h1>
-            <p>Ressources pédagogiques - Niveau 3AS</p>
+<!-- HEADER -->
+<header>
+  <a class="logo" onclick="navigate('home')" style="cursor:pointer;">
+    <div class="logo-badge">F</div>
+    <div class="logo-text">
+      <div class="logo-title">L'Atelier des PES</div>
+      <div class="logo-sub">3ème Année Secondaire</div>
+    </div>
+  </a>
+  <nav>
+    <a onclick="navigate('home')" id="nav-home" class="active">Accueil</a>
+    <a onclick="navigate('evals')" id="nav-evals">Évaluations</a>
+    <a onclick="navigate('docs')" id="nav-docs">Documents officiels</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════════
+     HOME VIEW
+══════════════════════════════════ -->
+<div class="view active" id="view-home">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-badge">✦ Niveau 3ème Année Secondaire</div>
+    <h1>Ressources pédagogiques<br>pour le <span>français</span></h1>
+    <p>Fiches pédagogiques, supports apprenants, évaluations et documents officiels — tout ce qu'il faut pour vos séquences en 3AS.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="navigate('home'); document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})">
+        📚 Explorer les projets
+      </button>
+      <button class="btn-secondary" onclick="navigate('docs')">
+        📋 Documents officiels
+      </button>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">Projets</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Séquences</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Compétences</div></div>
+    <div class="stat"><div class="stat-num">90+</div><div class="stat-label">Ressources</div></div>
+  </div>
+
+  <div class="section" id="projects-section">
+    <div class="section-head">
+      <h2>Les 4 projets de l'année</h2>
+      <p>Programme officiel — Filières Lettres & Philosophie / Langues Étrangères</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card proj-1" onclick="navigate('project', 0)">
+        <div class="project-card-top">
+          <div class="project-num">01</div>
+          <div class="project-icon">📖</div>
+          <h3>Textes et documents d'histoire</h3>
+          <p>Produire des textes informatifs sur des faits historiques avec témoignages.</p>
         </div>
-        <nav>Accueil &nbsp; | &nbsp; Filtrer</nav>
-    </header>
-
-    <section class="hero">
-        <h2>L'Atelier des PES de Français</h2>
-        <p>Ressources pédagogiques structurées par projet et par compétence pour les enseignants de français en Algérie.</p>
-    </section>
-
-    <main class="projects-container">
-
-        <!-- =========================================
-             PROJET 01 : Textes et documents d'histoire
-             ========================================= -->
-        <div class="projet-box">
-            <div class="projet-header p1">
-                <h2>Projet 01 : Textes et documents d'histoire</h2>
-                <p>Explorer les textes historiques, analyser les documents d'archives et comprendre les enjeux de la mémoire collective.</p>
-            </div>
-            
-            <div class="projet-content">
-                <!-- SÉQUENCE 01 -->
-                <details class="sequence-details">
-                    <summary>Séquence 01 : Informer d'un fait d'histoire de manière objective</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="fichiers_pdf/ton_document.pdf" target="_blank"><span class="pdf-icon">📄</span> Support texte 1 - L'Émir Abdelkader.pdf</a></li>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-
-                <!-- SÉQUENCE 02 -->
-                <details class="sequence-details">
-                    <summary>Séquence 02 : Présenter un fait d'histoire (commentaires/témoignages)</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-            </div>
+        <div class="project-card-foot">
+          <span class="seq-count">2 séquences</span>
+          <span class="arrow-link">Explorer →</span>
         </div>
-
-        <!-- =========================================
-             PROJET 02 : Le débat d'idées
-             ========================================= -->
-        <div class="projet-box">
-            <div class="projet-header p2">
-                <h2>Projet 02 : Le débat d'idées</h2>
-                <p>Maîtriser les techniques argumentatives, développer l'esprit critique et structurer un discours persuasif.</p>
-            </div>
-            
-            <div class="projet-content">
-                <!-- SÉQUENCE 01 -->
-                <details class="sequence-details">
-                    <summary>Séquence 01 : Produire un texte pour convaincre ou persuader</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-
-                <!-- SÉQUENCE 02 -->
-                <details class="sequence-details">
-                    <summary>Séquence 02 : Produire un texte pour concéder et réfuter</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-            </div>
+      </div>
+      <div class="project-card proj-2" onclick="navigate('project', 1)">
+        <div class="project-card-top">
+          <div class="project-num">02</div>
+          <div class="project-icon">💬</div>
+          <h3>Le débat d'idées</h3>
+          <p>Argumenter, convaincre, concéder et réfuter à travers des textes polémiques.</p>
         </div>
-
-        <!-- =========================================
-             PROJET 03 : L'appel
-             ========================================= -->
-        <div class="projet-box">
-            <div class="projet-header p3">
-                <h2>Projet 03 : L'appel</h2>
-                <p>Comprendre et produire des textes exhortatifs pour inciter à l'action.</p>
-            </div>
-            
-            <div class="projet-content">
-                <!-- SÉQUENCE UNIQUE -->
-                <details class="sequence-details">
-                    <summary>Séquence unique : Produire un texte pour inciter le destinataire à agir</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-            </div>
+        <div class="project-card-foot">
+          <span class="seq-count">2 séquences</span>
+          <span class="arrow-link" style="color:var(--gold)">Explorer →</span>
         </div>
-
-        <!-- =========================================
-             PROJET 04 : La nouvelle fantastique
-             ========================================= -->
-        <div class="projet-box">
-            <div class="projet-header p4">
-                <h2>Projet 04 : La nouvelle fantastique</h2>
-                <p>Découvrir les caractéristiques du fantastique et produire une nouvelle originale.</p>
-            </div>
-            
-            <div class="projet-content">
-                <!-- SÉQUENCE UNIQUE -->
-                <details class="sequence-details">
-                    <summary>Séquence unique : Produire un récit fantastique</summary>
-                    <div class="sequence-body">
-                        <details class="rubrique rub-lancement"><summary><span class="icon-text">🚀 Lancement du projet</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-eval"><summary><span class="icon-text">📋 Évaluation diagnostique</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-co"><summary><span class="icon-text">🎧 Compréhension de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-po"><summary><span class="icon-text">🗣️ Production de l'oral</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-ce"><summary><span class="icon-text">📄 Compréhension de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-pe"><summary><span class="icon-text">✍️ Production de l'écrit</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                        <details class="rubrique rub-remed"><summary><span class="icon-text">🔄 Remédiation</span></summary><div class="contenu-ressources"><ul><li><a href="#"><span class="pdf-icon">📄</span> Fichier PDF</a></li></ul></div></details>
-                    </div>
-                </details>
-            </div>
+      </div>
+      <div class="project-card proj-3" onclick="navigate('project', 2)">
+        <div class="project-card-top">
+          <div class="project-num">03</div>
+          <div class="project-icon">📣</div>
+          <h3>L'appel</h3>
+          <p>Comprendre et produire des textes exhortatifs pour inciter à l'action.</p>
         </div>
+        <div class="project-card-foot">
+          <span class="seq-count">1 séquence</span>
+          <span class="arrow-link" style="color:var(--coral)">Explorer →</span>
+        </div>
+      </div>
+      <div class="project-card proj-4" onclick="navigate('project', 3)">
+        <div class="project-card-top">
+          <div class="project-num">04</div>
+          <div class="project-icon">🌙</div>
+          <h3>La nouvelle fantastique</h3>
+          <p>Découvrir les caractéristiques du fantastique et produire un récit original.</p>
+        </div>
+        <div class="project-card-foot">
+          <span class="seq-count">1 séquence</span>
+          <span class="arrow-link" style="color:#a78bfa">Explorer →</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    </main>
+  <div class="section" style="padding-top: 0;">
+    <div class="section-head">
+      <h2>Accès rapide</h2>
+      <p>Ressources fréquemment consultées</p>
+    </div>
+    <div class="quick-grid">
+      <div class="quick-card" onclick="navigate('evals'); setEvalFilter('devoir')">
+        <div class="quick-icon" style="background:rgba(245,166,35,0.12)">📝</div>
+        <div><h4>Devoirs surveillés</h4><p>Sujets prêts à l'emploi</p></div>
+      </div>
+      <div class="quick-card" onclick="navigate('evals'); setEvalFilter('compo')">
+        <div class="quick-icon" style="background:rgba(232,93,74,0.12)">📜</div>
+        <div><h4>Compositions</h4><p>1er & 2ème trimestre</p></div>
+      </div>
+      <div class="quick-card" onclick="navigate('evals'); setEvalFilter('test')">
+        <div class="quick-icon" style="background:rgba(124,58,237,0.12)">🔎</div>
+        <div><h4>Tests de niveau</h4><p>Évaluation diagnostique</p></div>
+      </div>
+      <div class="quick-card" onclick="navigate('docs')">
+        <div class="quick-icon" style="background:rgba(0,200,150,0.1)">📋</div>
+        <div><h4>Docs officiels</h4><p>Programme & progression</p></div>
+      </div>
+    </div>
+  </div>
 
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", user => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
+  <footer>© 2026–2027 L'Atelier des PES de Français — 3ème Année Secondaire — Tous droits réservés</footer>
+</div>
+
+<!-- ══════════════════════════════════
+     PROJECT VIEW
+══════════════════════════════════ -->
+<div class="view" id="view-project">
+  <div class="proj-header" id="proj-header">
+    <div class="breadcrumb">
+      <a onclick="navigate('home')">Accueil</a>
+      <span>›</span>
+      <span id="proj-breadcrumb">Projet</span>
+    </div>
+    <h2 id="proj-title">Projet</h2>
+    <p id="proj-desc"></p>
+  </div>
+
+  <div class="proj-body">
+    <div class="section-head"><h2>Séquences du projet</h2></div>
+    <div class="seq-grid" id="seq-grid"></div>
+
+    <div class="res-section" id="bac-section">
+      <h3>🎓 <span>Sujets de Bac — Ressources</span></h3>
+      <div class="res-grid" id="bac-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SEQUENCE VIEW
+══════════════════════════════════ -->
+<div class="view" id="view-sequence">
+  <div class="proj-header" id="seq-header">
+    <div class="breadcrumb" id="seq-breadcrumb"></div>
+    <h2 id="seq-title">Séquence</h2>
+    <p id="seq-goal"></p>
+  </div>
+
+  <div class="competences-tabs" id="comp-tabs"></div>
+
+  <div id="comp-content"></div>
+</div>
+
+<!-- ══════════════════════════════════
+     EVALUATIONS VIEW
+══════════════════════════════════ -->
+<div class="view" id="view-evals">
+  <div class="proj-header">
+    <div class="breadcrumb"><a onclick="navigate('home')">Accueil</a> <span>›</span> Évaluations</div>
+    <h2>Évaluations</h2>
+    <p>Devoirs surveillés, compositions trimestrielles et tests de niveau — tous les projets</p>
+  </div>
+  <div class="proj-body">
+    <div class="eval-types">
+      <button class="eval-type-btn active" onclick="setEvalFilter('all')" id="ef-all">Toutes</button>
+      <button class="eval-type-btn" onclick="setEvalFilter('devoir')" id="ef-devoir">Devoirs surveillés</button>
+      <button class="eval-type-btn" onclick="setEvalFilter('compo')" id="ef-compo">Compositions</button>
+      <button class="eval-type-btn" onclick="setEvalFilter('test')" id="ef-test">Tests de niveau</button>
+    </div>
+    <div class="evals-grid" id="evals-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     DOCS OFFICIELS VIEW
+══════════════════════════════════ -->
+<div class="view" id="view-docs">
+  <div class="proj-header">
+    <div class="breadcrumb"><a onclick="navigate('home')">Accueil</a> <span>›</span> Documents officiels</div>
+    <h2>Documents officiels</h2>
+    <p>Textes de référence et guides pédagogiques de l'Éducation Nationale</p>
+  </div>
+  <div class="proj-body">
+    <div class="docs-grid">
+      <div class="doc-card" onclick="showModal('Progression annuelle', 'Guide de progression annuelle pour la 3ème année secondaire — Filières Lettres & Philosophie et Langues Étrangères.')">
+        <div class="doc-icon">📅</div>
+        <div>
+          <div class="doc-title">Progression annuelle</div>
+          <div class="doc-desc">Guide de progression pour les 26 semaines (104 heures) — 4 projets.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+      <div class="doc-card" onclick="showModal('Programme officiel', 'Programme officiel du Ministère de l\'Éducation Nationale — Curricula et objectifs pédagogiques 3AS.')">
+        <div class="doc-icon">📘</div>
+        <div>
+          <div class="doc-title">Programme officiel</div>
+          <div class="doc-desc">Curricula et objectifs pédagogiques — Édition en vigueur.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+      <div class="doc-card" onclick="showModal('Document d\'accompagnement', 'Ressources pour l\'implémentation du programme — Approche par compétences.')">
+        <div class="doc-icon">📗</div>
+        <div>
+          <div class="doc-title">Document d'accompagnement</div>
+          <div class="doc-desc">Ressources pour l'implémentation du programme et approche par compétences.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+      <div class="doc-card" onclick="showModal('Loi d\'orientation', 'Cadre réglementaire de l\'éducation nationale algérienne.')">
+        <div class="doc-icon">⚖️</div>
+        <div>
+          <div class="doc-title">Loi d'orientation</div>
+          <div class="doc-desc">Cadre réglementaire de l'éducation nationale — Texte officiel.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+      <div class="doc-card" onclick="showModal('Guide d\'élaboration des sujets', 'Méthodologie d\'examen 2017 — Guide pour la conception des sujets du baccalauréat.')">
+        <div class="doc-icon">📝</div>
+        <div>
+          <div class="doc-title">Guide d'élaboration des sujets</div>
+          <div class="doc-desc">Méthodologie d'examen 2017 — Conception des sujets du baccalauréat.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+      <div class="doc-card" onclick="showModal('Grilles d\'évaluation', 'Grilles et critères d\'évaluation officiels pour les productions écrites et orales.')">
+        <div class="doc-icon">📊</div>
+        <div>
+          <div class="doc-title">Grilles d'évaluation</div>
+          <div class="doc-desc">Critères officiels pour les productions écrites et orales au bac.</div>
+          <button class="btn-dl btn-dl-gold">⬇ Télécharger</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="showToast('Téléchargement simulé — fichier non disponible en démo'); document.getElementById('modal').classList.remove('open')">⬇ Télécharger</button>
+      <button class="btn-secondary" onclick="document.getElementById('modal').classList.remove('open')">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✔</span>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ══════════════════════════════════
+// DATA
+// ══════════════════════════════════
+const PROJECTS = [
+  {
+    title: 'Projet 01 : Textes et documents d\'histoire',
+    accentColor: '#00c896',
+    desc: 'Dans le cadre de la commémoration d\'une date historique, réaliser une recherche documentaire puis en faire une synthèse de l\'information à mettre à la disposition des élèves.',
+    sequences: [
+      {
+        title: 'Séquence 01',
+        goal: 'Produire un texte pour informer d\'un fait d\'histoire de manière objective',
+        competences: buildCompetences('informer un fait d\'histoire', 'informatif/objectif')
+      },
+      {
+        title: 'Séquence 02',
+        goal: 'Produire un texte pour présenter un fait d\'histoire en y introduisant des témoignages',
+        competences: buildCompetences('présenter avec témoignages', 'informatif/subjectif')
       }
-    </script>
+    ],
+    bac: [
+      { name: 'Lettre officielle', type: 'Sujet Bac' },
+      { name: 'Texte informatif', type: 'Sujet Bac' },
+      { name: 'Compte rendu historique', type: 'Corrigé type' }
+    ]
+  },
+  {
+    title: 'Projet 02 : Le débat d\'idées',
+    accentColor: '#f5a623',
+    desc: 'Organiser un débat en classe pour confronter des points de vue sur un sujet d\'actualité puis, en faire un compte rendu qui sera publié sur la page Facebook de l\'établissement.',
+    sequences: [
+      {
+        title: 'Séquence 01',
+        goal: 'Produire un texte pour convaincre ou persuader — S\'inscrire dans un débat',
+        competences: buildCompetences('convaincre / persuader', 'argumentatif')
+      },
+      {
+        title: 'Séquence 02',
+        goal: 'Produire un texte pour concéder et réfuter',
+        competences: buildCompetences('concéder et réfuter', 'polémique')
+      }
+    ],
+    bac: [
+      { name: 'Texte argumentatif', type: 'Sujet Bac' },
+      { name: 'Débat d\'idées', type: 'Sujet Bac' },
+      { name: 'Discours polémique', type: 'Corrigé type' }
+    ]
+  },
+  {
+    title: 'Projet 03 : L\'appel',
+    accentColor: '#e85d4a',
+    desc: 'Dans le cadre d\'une journée citoyenne, rédiger des appels pour inciter les habitants de la région à faire preuve de civisme.',
+    sequences: [
+      {
+        title: 'Séquence 01',
+        goal: 'Produire un texte pour inciter son destinataire à agir',
+        competences: buildCompetences('inciter à agir', 'exhortatif')
+      }
+    ],
+    bac: [
+      { name: 'Texte exhortatif', type: 'Sujet Bac' },
+      { name: 'Appel à l\'action', type: 'Sujet Bac' }
+    ]
+  },
+  {
+    title: 'Projet 04 : La nouvelle fantastique',
+    accentColor: '#a78bfa',
+    desc: 'Réaliser un recueil de nouvelles fantastiques à mettre à la disposition des élèves dans la bibliothèque du lycée.',
+    sequences: [
+      {
+        title: 'Séquence 01',
+        goal: 'Produire un récit fantastique original',
+        competences: buildCompetences('récit fantastique', 'narratif/fantastique')
+      }
+    ],
+    bac: [
+      { name: 'Nouvelle fantastique', type: 'Sujet Bac' },
+      { name: 'Analyse de texte fantastique', type: 'Corrigé type' }
+    ]
+  }
+];
+
+const EVALS = [
+  { type: 'test', tag: 'Test de niveau', title: 'Évaluation diagnostique — Rentrée', desc: 'Évaluer les pré-requis des élèves en compréhension et production écrites.', proj: 'Début d\'année' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°1 — Compréhension de l\'écrit', desc: 'Textes et documents d\'histoire — Analyser un document historique authentique.', proj: 'Projet 01' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°2 — Production écrite', desc: 'Rédiger un texte informatif sur un fait d\'histoire avec témoignages.', proj: 'Projet 01' },
+  { type: 'compo', tag: 'Composition', title: 'Composition du 1er trimestre', desc: 'Compréhension de l\'écrit et production — Projets 01 & 02.', proj: 'Projets 01–02' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°3 — Texte argumentatif', desc: 'Le débat d\'idées — Produire un texte pour convaincre ou persuader.', proj: 'Projet 02' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°4 — Concession & réfutation', desc: 'Rédiger un texte qui concède et réfute une thèse adverse.', proj: 'Projet 02' },
+  { type: 'compo', tag: 'Composition', title: 'Composition du 2ème trimestre', desc: 'Compréhension de l\'écrit et production — Projets 02 & 03.', proj: 'Projets 02–03' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°5 — L\'appel', desc: 'Produire un texte exhortatif pour inciter à l\'action citoyenne.', proj: 'Projet 03' },
+  { type: 'devoir', tag: 'Devoir surveillé', title: 'DS n°6 — Récit fantastique', desc: 'Analyser et produire un récit fantastique.', proj: 'Projet 04' },
+  { type: 'compo', tag: 'Composition', title: 'Composition du 3ème trimestre', desc: 'Compréhension de l\'écrit et production — Projets 03 & 04.', proj: 'Projets 03–04' },
+  { type: 'test', tag: 'Test de niveau', title: 'Pré-bac blanc — Simulation', desc: 'Épreuve complète de simulation baccalauréat — tous projets.', proj: 'Bac blanc' }
+];
+
+function buildCompetences(type, style) {
+  return [
+    {
+      key: 'lancement', label: '🚀 Lancement', icon: '🚀',
+      fiches: [
+        { badge: 'prof', label: 'Fiche pédagogique', title: `Lancement du projet — ${type}`, desc: 'Mise en situation, contrat didactique, présentation de la tâche finale.' },
+        { badge: 'eleve', label: 'Fiche apprenant', title: 'Fiche de lancement élève', desc: 'Découverte du projet, anticipation et remue-méninges guidé.' }
+      ]
+    },
+    {
+      key: 'diag', label: '📊 Éval. diagnostique', icon: '📊',
+      fiches: [
+        { badge: 'eval', label: 'Évaluation', title: 'Évaluation diagnostique écrite', desc: 'Mesure des acquis antérieurs — compréhension et production.' },
+        { badge: 'prof', label: 'Fiche pédagogique', title: 'Grille de remédiation', desc: 'Identifier les lacunes et planifier la remédiation ciblée.' }
+      ]
+    },
+    {
+      key: 'oral', label: '🎧 Compréhension orale', icon: '🎧',
+      fiches: [
+        { badge: 'prof', label: 'Fiche pédagogique', title: `Activités d'écoute — ${style}`, desc: 'Document sonore authentique, grille d\'écoute, exploitation.' },
+        { badge: 'eleve', label: 'Fiche apprenant', title: 'Fiche d\'écoute active', desc: 'Consignes d\'écoute, questions de compréhension, synthèse orale.' },
+        { badge: 'eval', label: 'Évaluation', title: 'Grille d\'évaluation orale', desc: 'Critères de réussite et indicateurs de performance — oral.' }
+      ]
+    },
+    {
+      key: 'ecrit', label: '📄 Compréhension écrite', icon: '📄',
+      fiches: [
+        { badge: 'prof', label: 'Fiche pédagogique', title: `Analyse textuelle — ${style}`, desc: 'Étude du texte support : structure, énonciation, lexique, procédés.' },
+        { badge: 'eleve', label: 'Fiche apprenant', title: 'Fiche de lecture analytique', desc: 'Questions guidées, grille d\'analyse, relevé des procédés textuels.' },
+        { badge: 'eval', label: 'Évaluation', title: 'Fiche d\'évaluation lecture', desc: 'Indicateurs de compréhension et de compétences analytiques.' }
+      ]
+    },
+    {
+      key: 'prod', label: '✍️ Production écrite', icon: '✍️',
+      fiches: [
+        { badge: 'prof', label: 'Fiche pédagogique', title: `Préparation à l\'écrit — ${type}`, desc: 'Outils linguistiques, planification du texte, grille de rédaction.' },
+        { badge: 'eleve', label: 'Fiche apprenant', title: 'Guide de rédaction', desc: 'Plan détaillé, connecteurs, modèle de structure et aide à la rédaction.' },
+        { badge: 'eval', label: 'Évaluation', title: 'Grille de correction production', desc: 'Critères de réussite : pertinence, cohérence, correction linguistique.' }
+      ]
+    },
+    {
+      key: 'rem', label: '🔄 Remédiation', icon: '🔄',
+      fiches: [
+        { badge: 'prof', label: 'Fiche pédagogique', title: 'Fiche de remédiation ciblée', desc: 'Exercices différenciés selon profil — lacunes identifiées en évaluation.' },
+        { badge: 'eleve', label: 'Fiche apprenant', title: 'Fiche d\'auto-correction', desc: 'Autocorrection guidée, points de grammaire et lexique à revoir.' }
+      ]
+    }
+  ];
+}
+
+// ══════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════
+let currentView = 'home';
+let currentProject = null;
+let currentSeq = null;
+
+function navigate(view, param) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+
+  if (view === 'home') {
+    document.getElementById('view-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active');
+  } else if (view === 'project') {
+    currentProject = param;
+    renderProject(param);
+    document.getElementById('view-project').classList.add('active');
+  } else if (view === 'sequence') {
+    renderSequence(param.proj, param.seq);
+    document.getElementById('view-sequence').classList.add('active');
+  } else if (view === 'evals') {
+    renderEvals('all');
+    document.getElementById('view-evals').classList.add('active');
+    document.getElementById('nav-evals').classList.add('active');
+  } else if (view === 'docs') {
+    document.getElementById('view-docs').classList.add('active');
+    document.getElementById('nav-docs').classList.add('active');
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ══════════════════════════════════
+// RENDER PROJECT
+// ══════════════════════════════════
+function renderProject(idx) {
+  const p = PROJECTS[idx];
+  document.getElementById('proj-breadcrumb').textContent = `Projet 0${idx+1}`;
+  document.getElementById('proj-title').textContent = p.title;
+  document.getElementById('proj-desc').textContent = p.desc;
+  document.getElementById('proj-header').style.borderBottom = `2px solid ${p.accentColor}40`;
+
+  // Sequences
+  const sg = document.getElementById('seq-grid');
+  sg.innerHTML = p.sequences.map((s, si) => `
+    <div class="seq-card" onclick="navigate('sequence', {proj:${idx}, seq:${si}})">
+      <div class="seq-num-badge" style="color:${p.accentColor};background:${p.accentColor}15;border-color:${p.accentColor}30">${String(si+1).padStart(2,'0')}</div>
+      <div class="seq-info">
+        <h4>${s.title}</h4>
+        <p>${s.goal}</p>
+        <div class="seq-meta">
+          <span class="chip" style="background:${p.accentColor}12;color:${p.accentColor};border-color:${p.accentColor}25">6 compétences</span>
+          <span class="chip" style="background:${p.accentColor}12;color:${p.accentColor};border-color:${p.accentColor}25">Ressources dispo</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Bac resources
+  const bg = document.getElementById('bac-grid');
+  bg.innerHTML = p.bac.map(b => `
+    <div class="res-card">
+      <div class="res-info">
+        <span class="res-icon">📄</span>
+        <div><div class="res-name">${b.name}</div><div class="res-type">${b.type}</div></div>
+      </div>
+      <button class="btn-dl btn-dl-gold" onclick="showToast('Téléchargement de : ${b.name}')">⬇ Télécharger</button>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════
+// RENDER SEQUENCE
+// ══════════════════════════════════
+function renderSequence(projIdx, seqIdx) {
+  const p = PROJECTS[projIdx];
+  const s = p.sequences[seqIdx];
+
+  // Breadcrumb
+  document.getElementById('seq-breadcrumb').innerHTML = `
+    <a onclick="navigate('home')">Accueil</a> <span>›</span>
+    <a onclick="navigate('project', ${projIdx})">${p.title.split(':')[0]}</a> <span>›</span>
+    <span>${s.title}</span>
+  `;
+  document.getElementById('seq-title').textContent = s.title;
+  document.getElementById('seq-goal').textContent = s.goal;
+
+  // Tabs
+  const tabs = document.getElementById('comp-tabs');
+  tabs.innerHTML = `<button class="tab-btn active" onclick="showComp(0, this, '${p.accentColor}')">Toutes</button>` +
+    s.competences.map((c, i) => `<button class="tab-btn" onclick="showComp(${i+1}, this, '${p.accentColor}')" data-idx="${i}">${c.icon} ${c.label.split(' ').slice(1).join(' ')}</button>`).join('');
+
+  // All competences content
+  renderAllComps(s, p.accentColor);
+}
+
+function renderAllComps(s, accent) {
+  const content = document.getElementById('comp-content');
+  content.innerHTML = s.competences.map((c, ci) => `
+    <div class="competence-block" id="comp-block-${ci}">
+      <div class="comp-header">
+        <span class="comp-icon">${c.icon}</span>
+        <div>
+          <div class="comp-title">${c.label}</div>
+          <div class="comp-sub">${c.fiches.length} ressource(s)</div>
+        </div>
+      </div>
+      <div class="fiches-grid">
+        ${c.fiches.map(f => `
+          <div class="fiche-card">
+            <div class="fiche-top">
+              <span class="fiche-badge badge-${f.badge}">${f.label}</span>
+              <div class="fiche-title">${f.title}</div>
+              <div class="fiche-desc">${f.desc}</div>
+            </div>
+            <div class="fiche-foot">
+              <span class="fiche-meta">PDF • Prêt à l'emploi</span>
+              <button class="btn-dl" onclick="showToast('Téléchargement : ${f.title.replace(/'/g, ' ')}')">⬇ Télécharger</button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function showComp(idx, btn, accent) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  // All = show everything, else scroll to that block
+  if (idx === 0) {
+    window.scrollTo({top: document.getElementById('comp-content').offsetTop - 120, behavior:'smooth'});
+  } else {
+    const block = document.getElementById(`comp-block-${idx-1}`);
+    if (block) block.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+// ══════════════════════════════════
+// RENDER EVALS
+// ══════════════════════════════════
+let currentEvalFilter = 'all';
+
+function setEvalFilter(type) {
+  currentEvalFilter = type;
+  // Update buttons
+  ['all','devoir','compo','test'].forEach(t => {
+    const btn = document.getElementById('ef-'+t);
+    if (btn) btn.classList.toggle('active', t === type);
+  });
+  renderEvals(type);
+}
+
+function renderEvals(type) {
+  const filtered = type === 'all' ? EVALS : EVALS.filter(e => e.type === type);
+  const tagClass = { devoir: 'tag-devoir', compo: 'tag-compo', test: 'tag-test' };
+  document.getElementById('evals-grid').innerHTML = filtered.map(e => `
+    <div class="eval-card">
+      <div class="eval-top">
+        <span class="eval-tag ${tagClass[e.type]}">${e.tag}</span>
+        <div class="eval-title">${e.title}</div>
+        <div class="eval-desc">${e.desc}</div>
+      </div>
+      <div class="eval-foot">
+        <span class="eval-proj">📁 ${e.proj}</span>
+        <button class="btn-dl btn-dl-gold" onclick="showToast('Téléchargement : ${e.title.replace(/'/g,' ')}')">⬇ Télécharger</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ══════════════════════════════════
+// MODAL & TOAST
+// ══════════════════════════════════
+function showModal(title, desc) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-desc').textContent = desc;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) document.getElementById('modal').classList.remove('open');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+</script>
 </body>
 </html>

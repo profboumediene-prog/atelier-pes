@@ -61,4 +61,238 @@
         .card:hover { transform: translateY(-5px); }
         .card-header { padding: 2rem 1.5rem; color: white; }
         .card-header h3 { margin: 0 0 0.5rem 0; font-size: 1.4rem; }
-        .card-header p { margin: 0; font-size: 0
+        .card-header p { margin: 0; font-size: 0.9rem; opacity: 0.9; }
+        
+        .p1 { background-color: var(--bleu-hist); }
+        .p2 { background-color: var(--vert-debat); }
+        .p3 { background-color: var(--orange-appel); }
+        .p4 { background-color: var(--violet-fant); }
+        
+        .card-body { padding: 1.5rem; font-size: 0.9rem; color: #475569; }
+        .btn-explorer { color: var(--vert-debat); text-decoration: none; font-weight: bold; }
+
+        /* =========================================
+           NOUVEAU CSS POUR LES SÉQUENCES ET RUBRIQUES 
+           ========================================= */
+        .sequence-section {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .sequence-title {
+            color: var(--bleu-hist);
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Style des boîtes déroulantes */
+        details.rubrique {
+            margin-bottom: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        /* Style de la barre cliquable */
+        details.rubrique summary {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none; /* Cache la flèche par défaut */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8fafc;
+            transition: background-color 0.2s;
+        }
+        
+        details.rubrique summary:hover {
+            background-color: #f1f5f9;
+        }
+
+        /* Cache la flèche sur Safari */
+        details.rubrique summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        /* Ajout d'une flèche personnalisée à droite */
+        details.rubrique summary::after {
+            content: "▼";
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+        details.rubrique[open] summary::after {
+            content: "▲";
+        }
+
+        /* Couleurs des bordures gauches selon la rubrique */
+        .rub-lancement summary { border-left: 4px solid #3b82f6; } /* Bleu */
+        .rub-eval summary { border-left: 4px solid #ef4444; }      /* Rouge */
+        .rub-oral summary { border-left: 4px solid #10b981; }      /* Vert */
+        .rub-ecrit summary { border-left: 4px solid #f59e0b; }     /* Jaune */
+
+        /* Style du contenu une fois ouvert */
+        .contenu-ressources {
+            padding: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .contenu-ressources ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .contenu-ressources li {
+            margin-bottom: 0.8rem;
+        }
+        .contenu-ressources li:last-child {
+            margin-bottom: 0;
+        }
+        .contenu-ressources a {
+            text-decoration: none;
+            color: #334155;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+        .contenu-ressources a:hover {
+            background-color: #f1f5f9;
+            color: var(--bleu-hist);
+        }
+        /* Icône PDF stylisée */
+        .pdf-icon {
+            color: #ef4444;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-text">
+            <h1>L'Atelier des PES de Français</h1>
+            <p>Ressources pédagogiques - Niveau 3AS</p>
+        </div>
+        <nav>Accueil &nbsp; | &nbsp; Filtrer</nav>
+    </header>
+
+    <section class="hero">
+        <h2>L'Atelier des PES de Français</h2>
+        <p>Ressources pédagogiques structurées par projet et par compétence pour les enseignants de français en Algérie.</p>
+    </section>
+
+    <main class="projects-section">
+        <article class="card">
+            <div class="card-header p1">
+                <h3>Projet 01</h3>
+                <p>Textes et documents d'histoire</p>
+            </div>
+            <div class="card-body">
+                <p>Explorer les textes historiques, analyser les documents d'archives et comprendre les enjeux de la mémoire collective.</p>
+                <a href="#sequence-demo" class="btn-explorer">Voir les séquences →</a>
+            </div>
+        </article>
+        <article class="card">
+            <div class="card-header p2">
+                <h3>Projet 02</h3>
+                <p>Le débat d'idées</p>
+            </div>
+            <div class="card-body">
+                <p>Maîtriser les techniques argumentatives, développer l'esprit critique et structurer un discours persuasif.</p>
+                <a href="#" class="btn-explorer">Voir les séquences →</a>
+            </div>
+        </article>
+        <article class="card">
+            <div class="card-header p3">
+                <h3>Projet 03</h3>
+                <p>L'appel</p>
+            </div>
+            <div class="card-body">
+                <p>Comprendre et produire des textes exhortatifs pour inciter à l'action.</p>
+                <a href="#" class="btn-explorer">Voir les séquences →</a>
+            </div>
+        </article>
+        <article class="card">
+            <div class="card-header p4">
+                <h3>Projet 04</h3>
+                <p>La nouvelle fantastique</p>
+            </div>
+            <div class="card-body">
+                <p>Découvrir les caractéristiques du fantastique et produire une nouvelle originale.</p>
+                <a href="#" class="btn-explorer">Voir les séquences →</a>
+            </div>
+        </article>
+    </main>
+
+    <section id="sequence-demo" class="sequence-section">
+        
+        <div class="sequence-title">
+            <h2>Séquence 01</h2>
+            <span style="font-size: 0.9rem; color: #64748b;">Projet 01</span>
+        </div>
+
+        <details class="rubrique rub-lancement">
+            <summary>Lancement du projet</summary>
+            <div class="contenu-ressources">
+                <ul>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Contrat d'apprentissage.pdf</a></li>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Présentation globale du projet.pdf</a></li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="rubrique rub-eval">
+            <summary>Évaluation diagnostique</summary>
+            <div class="contenu-ressources">
+                <ul>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Support d'évaluation.pdf</a></li>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Grille de correction.pdf</a></li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="rubrique rub-oral">
+            <summary>Compréhension de l'oral</summary>
+            <div class="contenu-ressources">
+                <ul>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Fiche pédagogique - Séance 1.pdf</a></li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="rubrique rub-ecrit">
+            <summary>Compréhension de l'écrit</summary>
+            <div class="contenu-ressources">
+                <ul>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Support texte 1.pdf</a></li>
+                    <li><a href="#" target="_blank"><span class="pdf-icon">📄</span> Questionnaire de lecture.pdf</a></li>
+                </ul>
+            </div>
+        </details>
+
+    </section>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+</body>
+</html>

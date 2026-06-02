@@ -33,8 +33,10 @@ tailwind.config = {
   <style>body { box-sizing: border-box; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  <script src="/_sdk/telemetry_sdk.js"></script></head>
- <body class="h-full bg-slate-50 text-slate-800 overflow-auto"><!-- HEADER -->
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-8 h-16 flex items-center justify-between"><a class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+ <body class="h-full bg-slate-50 text-slate-800 overflow-auto">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-8 h-16 flex items-center justify-between">
+   <a class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg font-heading">
      F
     </div>
@@ -49,19 +51,24 @@ tailwind.config = {
       3ème Année Secondaire
      </div>
     </div></a>
-   <nav class="hidden md:flex items-center gap-1"><a onclick="navigate('home')" id="nav-home" class="nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50">Accueil</a> <a onclick="navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Évaluations</a> <a onclick="navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Documents officiels</a>
+   <nav class="hidden md:flex items-center gap-1">
+    <a onclick="navigate('home')" id="nav-home" class="nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50">Accueil</a> <a onclick="navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Évaluations</a> <a onclick="navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Documents officiels</a>
    </nav><!-- Mobile menu --> <button class="md:hidden p-2 rounded-lg hover:bg-slate-100" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
   </header><!-- Mobile Nav -->
-  <div id="mobile-nav" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-40 p-4 flex flex-col gap-2"><a onclick="navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a> <a onclick="navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a> <a onclick="navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
+  <div id="mobile-nav" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-40 p-4 flex flex-col gap-2">
+   <a onclick="navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a> <a onclick="navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a> <a onclick="navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
   </div><!-- ═══ HOME VIEW ═══ -->
-  <div class="view active" id="view-home"><!-- Hero -->
+  <div class="view active" id="view-home">
+   <!-- Hero -->
    <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-16 px-6 text-center">
     <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #10b981 1px, transparent 0); background-size: 32px 32px;"></div>
-    <div class="relative max-w-2xl mx-auto"><span class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-emerald-200">✦ Niveau 3ème Année Secondaire</span>
+    <div class="relative max-w-2xl mx-auto">
+     <span class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-emerald-200">✦ Niveau 3ème Année Secondaire</span>
      <h1 class="font-heading text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4" id="hero-heading">Ressources pédagogiques<br>
        pour le <span class="text-emerald-600">français</span></h1>
      <p class="text-slate-500 text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-8" id="hero-desc">Fiches pédagogiques, supports apprenants, évaluations et documents officiels — tout pour vos séquences en 3AS.</p>
-     <div class="flex gap-3 justify-center flex-wrap"><button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-emerald-200 flex items-center gap-2" onclick="document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})"> <i data-lucide="book-open" class="w-4 h-4"></i> Explorer les projets </button> <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="navigate('docs')"> <i data-lucide="file-text" class="w-4 h-4"></i> Documents officiels </button>
+     <div class="flex gap-3 justify-center flex-wrap">
+      <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-emerald-200 flex items-center gap-2" onclick="document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})"> <i data-lucide="book-open" class="w-4 h-4"></i> Explorer les projets </button> <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="navigate('docs')"> <i data-lucide="file-text" class="w-4 h-4"></i> Documents officiels </button>
      </div>
     </div>
    </div><!-- Stats -->
@@ -169,7 +176,8 @@ tailwind.config = {
   <div class="view" id="view-project">
    <div class="bg-gradient-to-br from-emerald-50 to-white px-6 py-10 border-b border-slate-200" id="proj-header-section">
     <div class="max-w-6xl mx-auto">
-     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a> <span>›</span> <span id="proj-breadcrumb">Projet</span>
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+      <a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a> <span>›</span> <span id="proj-breadcrumb">Projet</span>
      </div>
      <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-2" id="proj-title"></h2>
      <p class="text-slate-500 text-sm max-w-xl leading-relaxed" id="proj-desc"></p>
@@ -196,7 +204,8 @@ tailwind.config = {
   <div class="view" id="view-evals">
    <div class="bg-gradient-to-br from-amber-50 to-white px-6 py-10 border-b border-slate-200">
     <div class="max-w-6xl mx-auto">
-     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Évaluations</span>
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+      <a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Évaluations</span>
      </div>
      <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Évaluations</h2>
      <p class="text-slate-500 text-sm">Devoirs surveillés, compositions trimestrielles et tests de niveau</p>
@@ -204,9 +213,11 @@ tailwind.config = {
    </div>
    <div class="max-w-6xl mx-auto px-6 py-8">
     <div class="mb-6">
-     <div class="flex gap-2 flex-wrap mb-6"><button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all active" id="ef-all" onclick="setEvalFilter('all')">Toutes les évaluations</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim1" onclick="setEvalFilter('trim1')">📅 1er Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim2" onclick="setEvalFilter('trim2')">📅 2ème Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim3" onclick="setEvalFilter('trim3')">📅 3ème Trimestre</button>
+     <div class="flex gap-2 flex-wrap mb-6">
+      <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all active" id="ef-all" onclick="setEvalFilter('all')">Toutes les évaluations</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim1" onclick="setEvalFilter('trim1')">📅 1er Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim2" onclick="setEvalFilter('trim2')">📅 2ème Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim3" onclick="setEvalFilter('trim3')">📅 3ème Trimestre</button>
      </div>
-     <div class="flex gap-2 flex-wrap"><button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-devoir" onclick="setEvalFilter('devoir')">📝 Devoirs</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-compo" onclick="setEvalFilter('compo')">📜 Compositions</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-test" onclick="setEvalFilter('test')">🔎 Tests</button>
+     <div class="flex gap-2 flex-wrap">
+      <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-devoir" onclick="setEvalFilter('devoir')">📝 Devoirs</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-compo" onclick="setEvalFilter('compo')">📜 Compositions</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-test" onclick="setEvalFilter('test')">🔎 Tests</button>
      </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="evals-grid"></div>
@@ -215,7 +226,8 @@ tailwind.config = {
   <div class="view" id="view-docs">
    <div class="bg-gradient-to-br from-blue-50 to-white px-6 py-10 border-b border-slate-200">
     <div class="max-w-6xl mx-auto">
-     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Documents officiels</span>
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+      <a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Documents officiels</span>
      </div>
      <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Documents officiels</h2>
      <p class="text-slate-500 text-sm">Textes de référence et guides pédagogiques</p>
@@ -225,13 +237,16 @@ tailwind.config = {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="docs-grid"></div>
    </div>
   </div><!-- TOAST -->
-  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 bg-white border border-emerald-200 shadow-xl text-slate-800 px-5 py-3 rounded-xl text-sm font-medium z-[300] flex items-center gap-2 transition-transform duration-300 pointer-events-none" id="toast"><span class="text-emerald-600">✔</span> <span id="toast-msg"></span>
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 bg-white border border-emerald-200 shadow-xl text-slate-800 px-5 py-3 rounded-xl text-sm font-medium z-[300] flex items-center gap-2 transition-transform duration-300 pointer-events-none" id="toast">
+   <span class="text-emerald-600">✔</span> <span id="toast-msg"></span>
   </div><!-- MODAL -->
   <div class="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal" onclick="closeModal(event)">
-   <div class="bg-white rounded-2xl p-6 max-w-md w-full relative shadow-2xl" onclick="event.stopPropagation()"><button class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">✕</button>
+   <div class="bg-white rounded-2xl p-6 max-w-md w-full relative shadow-2xl" onclick="event.stopPropagation()">
+    <button class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">✕</button>
     <h3 class="font-heading text-xl font-bold text-slate-900 mb-2" id="modal-title"></h3>
     <p class="text-sm text-slate-500 leading-relaxed mb-6" id="modal-desc"></p>
-    <div class="flex gap-3"><button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all flex items-center gap-2" onclick="showToast('Téléchargement simulé — fichier non disponible en démo'); document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')"> <i data-lucide="download" class="w-4 h-4"></i> Télécharger </button> <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm px-5 py-2.5 rounded-xl transition-all" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">Annuler</button>
+    <div class="flex gap-3">
+     <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all flex items-center gap-2" onclick="showToast('Téléchargement simulé — fichier non disponible en démo'); document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')"> <i data-lucide="download" class="w-4 h-4"></i> Télécharger </button> <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm px-5 py-2.5 rounded-xl transition-all" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">Annuler</button>
     </div>
    </div>
   </div>
@@ -306,7 +321,7 @@ const EVALS = [
   { type: 'test', tag: 'Test de niveau', title: 'Évaluation diagnostique — Rentrée', desc: 'Évaluer les pré-requis en compréhension et production écrites.', proj: 'Début d\'année', trimestre: 0 },
   
   // 1er Trimestre
-  { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 1', desc: 'Analyser un document historique authentique.', proj: 'Projet 001', trimestre: 1, subject: 1 },
+  { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 1', desc: 'Analyser un document historique authentique.', proj: 'Projet 01', trimestre: 1, subject: 1 },
   { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 2', desc: 'Rédiger un texte informatif sur un fait d\'histoire.', proj: 'Projet 01', trimestre: 1, subject: 2 },
   { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 3', desc: 'Compréhension et synthèse d\'un document historique.', proj: 'Projet 01', trimestre: 1, subject: 3 },
   { type: 'compo', tag: 'Composition 1er Trim', title: 'Composition du 1er trimestre — Sujet 1', desc: 'Compréhension et production — Projets 01 & 02.', proj: 'Projets 01–02', trimestre: 1, subject: 1 },
@@ -544,7 +559,7 @@ function getPDFUrl(filename) {
 function downloadPDF(filename, label) {
   const url = getPDFUrl(filename);
   window.open(url, '_blank');
-  showToast(`Téléchargement : ${label}`);
+  showToast(`📥 Ouverture : ${label}`);
 }
 
 function renderSequence(projIdx, seqIdx) {
@@ -774,5 +789,5 @@ window.elementSdk.init({
   ])
 });
 </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a056980198784914',t:'MTc4MDQwNDczMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a056a9f29dd8f5b2',t:'MTc4MDQwNTQ2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

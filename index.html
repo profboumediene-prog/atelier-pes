@@ -1,125 +1,800 @@
 <!doctype html>
 <html lang="fr" class="h-full">
-<head>
+ <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>L'Atelier des PES — 3ème Année Secondaire</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;family=Fraunces:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            heading: ['Fraunces', 'serif'],
-            body: ['DM Sans', 'sans-serif']
-          }
-        }
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        heading: ['Fraunces', 'serif'],
+        body: ['DM Sans', 'sans-serif']
       }
     }
-  </script>
+  }
+}
+</script>
   <style>
-    html, body { height: 100%; margin: 0; }
-    body { font-family: 'DM Sans', sans-serif; box-sizing: border-box; }
-    .view { display: none; animation: fadeIn 0.3s ease; }
-    .view.active { display: block; }
-    @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f8fafc; }
-    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-  </style>
-</head>
-<body class="h-full bg-slate-50 text-slate-800 overflow-auto">
+  html, body { height: 100%; margin: 0; }
+  body { font-family: 'DM Sans', sans-serif; }
+  .view { display: none; animation: fadeIn 0.3s ease; }
+  .view.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f8fafc; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+</style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ <script src="/_sdk/telemetry_sdk.js"></script></head>
+ <body class="h-full bg-slate-50 text-slate-800 overflow-auto"><!-- HEADER -->
+  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-8 h-16 flex items-center justify-between"><a class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg font-heading">
+     F
+    </div>
+    <div>
+     <div class="font-heading font-bold text-xs text-slate-400 uppercase tracking-wider" id="header-org">
+      L'Atelier des PES de français
+     </div>
+     <div class="font-heading font-bold text-sm text-slate-900" id="header-title">
+      L'Atelier des PES
+     </div>
+     <div class="text-[11px] text-emerald-600 font-medium" id="header-subtitle">
+      3ème Année Secondaire
+     </div>
+    </div></a>
+   <nav class="hidden md:flex items-center gap-1"><a onclick="navigate('home')" id="nav-home" class="nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50">Accueil</a> <a onclick="navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Évaluations</a> <a onclick="navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100">Documents officiels</a>
+   </nav><!-- Mobile menu --> <button class="md:hidden p-2 rounded-lg hover:bg-slate-100" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')"> <i data-lucide="menu" class="w-5 h-5"></i> </button>
+  </header><!-- Mobile Nav -->
+  <div id="mobile-nav" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-40 p-4 flex flex-col gap-2"><a onclick="navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a> <a onclick="navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a> <a onclick="navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
+  </div><!-- ═══ HOME VIEW ═══ -->
+  <div class="view active" id="view-home"><!-- Hero -->
+   <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-16 px-6 text-center">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #10b981 1px, transparent 0); background-size: 32px 32px;"></div>
+    <div class="relative max-w-2xl mx-auto"><span class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-emerald-200">✦ Niveau 3ème Année Secondaire</span>
+     <h1 class="font-heading text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4" id="hero-heading">Ressources pédagogiques<br>
+       pour le <span class="text-emerald-600">français</span></h1>
+     <p class="text-slate-500 text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-8" id="hero-desc">Fiches pédagogiques, supports apprenants, évaluations et documents officiels — tout pour vos séquences en 3AS.</p>
+     <div class="flex gap-3 justify-center flex-wrap"><button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-emerald-200 flex items-center gap-2" onclick="document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})"> <i data-lucide="book-open" class="w-4 h-4"></i> Explorer les projets </button> <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="navigate('docs')"> <i data-lucide="file-text" class="w-4 h-4"></i> Documents officiels </button>
+     </div>
+    </div>
+   </div><!-- Stats -->
+   <div class="flex justify-center flex-wrap gap-0 border-y border-slate-200 bg-white">
+    <div class="px-8 py-5 text-center border-r border-slate-100 last:border-r-0">
+     <div class="font-heading text-2xl font-bold text-emerald-600">
+      4
+     </div>
+     <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">
+      Projets
+     </div>
+    </div>
+    <div class="px-8 py-5 text-center border-r border-slate-100">
+     <div class="font-heading text-2xl font-bold text-emerald-600">
+      6
+     </div>
+     <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">
+      Séquences
+     </div>
+    </div>
+    <div class="px-8 py-5 text-center border-r border-slate-100">
+     <div class="font-heading text-2xl font-bold text-emerald-600">
+      6
+     </div>
+     <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">
+      Compétences
+     </div>
+    </div>
+    <div class="px-8 py-5 text-center">
+     <div class="font-heading text-2xl font-bold text-emerald-600">
+      90+
+     </div>
+     <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">
+      Ressources
+     </div>
+    </div>
+   </div><!-- Projects -->
+   <div class="max-w-6xl mx-auto px-6 py-12" id="projects-section">
+    <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Les 4 projets de l'année</h2>
+    <p class="text-slate-400 text-sm mb-8">Programme officiel — Filières Lettres &amp; Philosophie / Langues Étrangères</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="projects-grid"></div>
+   </div><!-- Quick Access -->
+   <div class="max-w-6xl mx-auto px-6 pb-12">
+    <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Accès rapide</h2>
+    <p class="text-slate-400 text-sm mb-6">Ressources fréquemment consultées</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+     <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-amber-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('devoir'),100)">
+      <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-xl">
+       📝
+      </div>
+      <div>
+       <div class="font-semibold text-sm">
+        Devoirs surveillés
+       </div>
+       <div class="text-xs text-slate-400">
+        Sujets prêts à l'emploi
+       </div>
+      </div>
+     </div>
+     <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-rose-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('compo'),100)">
+      <div class="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center text-xl">
+       📜
+      </div>
+      <div>
+       <div class="font-semibold text-sm">
+        Compositions
+       </div>
+       <div class="text-xs text-slate-400">
+        1er, 2ème &amp; 3ème trimestre
+       </div>
+      </div>
+     </div>
+     <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-violet-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('test'),100)">
+      <div class="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center text-xl">
+       🔎
+      </div>
+      <div>
+       <div class="font-semibold text-sm">
+        Tests de niveau
+       </div>
+       <div class="text-xs text-slate-400">
+        Évaluation diagnostique
+       </div>
+      </div>
+     </div>
+     <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-emerald-300 hover:-translate-y-0.5 transition-all" onclick="navigate('docs')">
+      <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-xl">
+       📋
+      </div>
+      <div>
+       <div class="font-semibold text-sm">
+        Docs officiels
+       </div>
+       <div class="text-xs text-slate-400">
+        Programme &amp; progression
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <footer class="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+    © 2026–2027 L'Atelier des PES — 3ème Année Secondaire
+   </footer>
+  </div><!-- ═══ PROJECT VIEW ═══ -->
+  <div class="view" id="view-project">
+   <div class="bg-gradient-to-br from-emerald-50 to-white px-6 py-10 border-b border-slate-200" id="proj-header-section">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a> <span>›</span> <span id="proj-breadcrumb">Projet</span>
+     </div>
+     <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-2" id="proj-title"></h2>
+     <p class="text-slate-500 text-sm max-w-xl leading-relaxed" id="proj-desc"></p>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-10">
+    <h3 class="font-heading text-lg font-bold text-slate-900 mb-5 flex items-center gap-2"><i data-lucide="layers" class="w-5 h-5 text-emerald-600"></i> Séquences du projet</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10" id="seq-grid"></div>
+    <h3 class="font-heading text-lg font-bold text-slate-900 mb-5 flex items-center gap-2"><i data-lucide="graduation-cap" class="w-5 h-5 text-amber-500"></i> Sujets de Bac</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="bac-grid"></div>
+   </div>
+  </div><!-- ═══ SEQUENCE VIEW ═══ -->
+  <div class="view" id="view-sequence">
+   <div class="bg-gradient-to-br from-teal-50 to-white px-6 py-10 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4" id="seq-breadcrumb"></div>
+     <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2" id="seq-title"></h2>
+     <p class="text-slate-500 text-sm" id="seq-goal"></p>
+    </div>
+   </div>
+   <div class="sticky top-16 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-3 overflow-x-auto flex gap-2" id="comp-tabs"></div>
+   <div class="max-w-6xl mx-auto px-6 py-8" id="comp-content"></div>
+  </div><!-- ═══ EVALS VIEW ═══ -->
+  <div class="view" id="view-evals">
+   <div class="bg-gradient-to-br from-amber-50 to-white px-6 py-10 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Évaluations</span>
+     </div>
+     <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Évaluations</h2>
+     <p class="text-slate-500 text-sm">Devoirs surveillés, compositions trimestrielles et tests de niveau</p>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-8">
+    <div class="mb-6">
+     <div class="flex gap-2 flex-wrap mb-6"><button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all active" id="ef-all" onclick="setEvalFilter('all')">Toutes les évaluations</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim1" onclick="setEvalFilter('trim1')">📅 1er Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim2" onclick="setEvalFilter('trim2')">📅 2ème Trimestre</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim3" onclick="setEvalFilter('trim3')">📅 3ème Trimestre</button>
+     </div>
+     <div class="flex gap-2 flex-wrap"><button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-devoir" onclick="setEvalFilter('devoir')">📝 Devoirs</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-compo" onclick="setEvalFilter('compo')">📜 Compositions</button> <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-test" onclick="setEvalFilter('test')">🔎 Tests</button>
+     </div>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="evals-grid"></div>
+   </div>
+  </div><!-- ═══ DOCS VIEW ═══ -->
+  <div class="view" id="view-docs">
+   <div class="bg-gradient-to-br from-blue-50 to-white px-6 py-10 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto">
+     <div class="flex items-center gap-2 text-xs text-slate-400 mb-4"><a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Documents officiels</span>
+     </div>
+     <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Documents officiels</h2>
+     <p class="text-slate-500 text-sm">Textes de référence et guides pédagogiques</p>
+    </div>
+   </div>
+   <div class="max-w-6xl mx-auto px-6 py-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="docs-grid"></div>
+   </div>
+  </div><!-- TOAST -->
+  <div class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 bg-white border border-emerald-200 shadow-xl text-slate-800 px-5 py-3 rounded-xl text-sm font-medium z-[300] flex items-center gap-2 transition-transform duration-300 pointer-events-none" id="toast"><span class="text-emerald-600">✔</span> <span id="toast-msg"></span>
+  </div><!-- MODAL -->
+  <div class="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal" onclick="closeModal(event)">
+   <div class="bg-white rounded-2xl p-6 max-w-md w-full relative shadow-2xl" onclick="event.stopPropagation()"><button class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">✕</button>
+    <h3 class="font-heading text-xl font-bold text-slate-900 mb-2" id="modal-title"></h3>
+    <p class="text-sm text-slate-500 leading-relaxed mb-6" id="modal-desc"></p>
+    <div class="flex gap-3"><button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all flex items-center gap-2" onclick="showToast('Téléchargement simulé — fichier non disponible en démo'); document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')"> <i data-lucide="download" class="w-4 h-4"></i> Télécharger </button> <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm px-5 py-2.5 rounded-xl transition-all" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">Annuler</button>
+    </div>
+   </div>
+  </div>
+  <script>
+// ═══ DATA ═══
+const PROJECTS = [
+  {
+    title: 'Textes et documents d\'histoire',
+    icon: '📖', color: 'emerald',
+    desc: 'Réaliser une recherche documentaire sur une date historique puis en faire une synthèse à mettre à la disposition des élèves.',
+    sequences: [
+      { 
+        title: 'Séquence 01', 
+        goal: 'Produire un texte pour informer d\'un fait d\'histoire de manière objective',
+        rubrics: null // Will be built on-demand
+      },
+      { 
+        title: 'Séquence 02', 
+        goal: 'Produire un texte pour présenter un fait d\'histoire en y introduisant des témoignages',
+        rubrics: null // Will be built on-demand
+      }
+    ],
+    bac: [{ name: 'Lettre officielle', type: 'Sujet Bac' }, { name: 'Texte informatif', type: 'Sujet Bac' }, { name: 'Compte rendu historique', type: 'Corrigé type' }]
+  },
+  {
+    title: 'Le débat d\'idées',
+    icon: '💬', color: 'amber',
+    desc: 'Organiser un débat en classe pour confronter des points de vue sur un sujet d\'actualité puis en faire un compte rendu.',
+    sequences: [
+      { 
+        title: 'Séquence 01', 
+        goal: 'Produire un texte pour convaincre ou persuader — S\'inscrire dans un débat',
+        rubrics: null
+      },
+      { 
+        title: 'Séquence 02', 
+        goal: 'Produire un texte pour concéder et réfuter',
+        rubrics: null
+      }
+    ],
+    bac: [{ name: 'Texte argumentatif', type: 'Sujet Bac' }, { name: 'Débat d\'idées', type: 'Sujet Bac' }, { name: 'Discours polémique', type: 'Corrigé type' }]
+  },
+  {
+    title: 'L\'appel',
+    icon: '📣', color: 'rose',
+    desc: 'Rédiger des appels pour inciter les habitants de la région à faire preuve de civisme.',
+    sequences: [
+      { 
+        title: 'Séquence 01', 
+        goal: 'Produire un texte pour inciter son destinataire à agir',
+        rubrics: null
+      }
+    ],
+    bac: [{ name: 'Texte exhortatif', type: 'Sujet Bac' }, { name: 'Appel à l\'action', type: 'Sujet Bac' }]
+  },
+  {
+    title: 'La nouvelle fantastique',
+    icon: '🌙', color: 'violet',
+    desc: 'Réaliser un recueil de nouvelles fantastiques à mettre à la disposition des élèves dans la bibliothèque.',
+    sequences: [
+      { 
+        title: 'Séquence 01', 
+        goal: 'Produire un récit fantastique original',
+        rubrics: null
+      }
+    ],
+    bac: [{ name: 'Nouvelle fantastique', type: 'Sujet Bac' }, { name: 'Analyse de texte fantastique', type: 'Corrigé type' }]
+  }
+];
 
-  <div id="auth-screen" class="fixed inset-0 z-[400] bg-slate-950 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
-      <div class="text-center mb-6">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-xl mx-auto mb-3 font-heading">F</div>
-        <h2 class="font-heading text-2xl font-bold text-slate-900">L'Atelier des PES</h2>
-        <p class="text-xs text-slate-400 mt-1">Espace sécurisé — Veuillez introduire vos accès membres</p>
+const EVALS = [
+  { type: 'test', tag: 'Test de niveau', title: 'Évaluation diagnostique — Rentrée', desc: 'Évaluer les pré-requis en compréhension et production écrites.', proj: 'Début d\'année', trimestre: 0 },
+  
+  // 1er Trimestre
+  { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 1', desc: 'Analyser un document historique authentique.', proj: 'Projet 01', trimestre: 1, subject: 1 },
+  { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 2', desc: 'Rédiger un texte informatif sur un fait d\'histoire.', proj: 'Projet 01', trimestre: 1, subject: 2 },
+  { type: 'devoir', tag: 'Devoir surveillé — 1er Trim', title: 'Devoir du 1er trimestre — Sujet 3', desc: 'Compréhension et synthèse d\'un document historique.', proj: 'Projet 01', trimestre: 1, subject: 3 },
+  { type: 'compo', tag: 'Composition 1er Trim', title: 'Composition du 1er trimestre — Sujet 1', desc: 'Compréhension et production — Projets 01 & 02.', proj: 'Projets 01–02', trimestre: 1, subject: 1 },
+  { type: 'compo', tag: 'Composition 1er Trim', title: 'Composition du 1er trimestre — Sujet 2', desc: 'Compréhension et production — Projets 01 & 02.', proj: 'Projets 01–02', trimestre: 1, subject: 2 },
+  { type: 'compo', tag: 'Composition 1er Trim', title: 'Composition du 1er trimestre — Sujet 3', desc: 'Compréhension et production — Projets 01 & 02.', proj: 'Projets 01–02', trimestre: 1, subject: 3 },
+  
+  // 2ème Trimestre
+  { type: 'devoir', tag: 'Devoir surveillé — 2ème Trim', title: 'Devoir du 2ème trimestre — Sujet 1', desc: 'Produire un texte pour convaincre ou persuader.', proj: 'Projet 02', trimestre: 2, subject: 1 },
+  { type: 'devoir', tag: 'Devoir surveillé — 2ème Trim', title: 'Devoir du 2ème trimestre — Sujet 2', desc: 'Rédiger un texte qui concède et réfute.', proj: 'Projet 02', trimestre: 2, subject: 2 },
+  { type: 'devoir', tag: 'Devoir surveillé — 2ème Trim', title: 'Devoir du 2ème trimestre — Sujet 3', desc: 'Analyser et produire un texte argumentatif.', proj: 'Projet 02', trimestre: 2, subject: 3 },
+  { type: 'compo', tag: 'Composition 2ème Trim', title: 'Composition du 2ème trimestre — Sujet 1', desc: 'Compréhension et production — Projets 02 & 03.', proj: 'Projets 02–03', trimestre: 2, subject: 1 },
+  { type: 'compo', tag: 'Composition 2ème Trim', title: 'Composition du 2ème trimestre — Sujet 2', desc: 'Compréhension et production — Projets 02 & 03.', proj: 'Projets 02–03', trimestre: 2, subject: 2 },
+  { type: 'compo', tag: 'Composition 2ème Trim', title: 'Composition du 2ème trimestre — Sujet 3', desc: 'Compréhension et production — Projets 02 & 03.', proj: 'Projets 02–03', trimestre: 2, subject: 3 },
+  
+  // 3ème Trimestre
+  { type: 'devoir', tag: 'Devoir surveillé — 3ème Trim', title: 'Devoir du 3ème trimestre — Sujet 1', desc: 'Produire un texte exhortatif.', proj: 'Projet 03', trimestre: 3, subject: 1 },
+  { type: 'devoir', tag: 'Devoir surveillé — 3ème Trim', title: 'Devoir du 3ème trimestre — Sujet 2', desc: 'Analyser et produire un récit fantastique.', proj: 'Projet 04', trimestre: 3, subject: 2 },
+  { type: 'devoir', tag: 'Devoir surveillé — 3ème Trim', title: 'Devoir du 3ème trimestre — Sujet 3', desc: 'Synthèse des compétences de l\'année.', proj: 'Projets 03–04', trimestre: 3, subject: 3 },
+  { type: 'compo', tag: 'Composition 3ème Trim', title: 'Composition du 3ème trimestre — Sujet 1', desc: 'Compréhension et production — Projets 03 & 04.', proj: 'Projets 03–04', trimestre: 3, subject: 1 },
+  { type: 'compo', tag: 'Composition 3ème Trim', title: 'Composition du 3ème trimestre — Sujet 2', desc: 'Compréhension et production — Projets 03 & 04.', proj: 'Projets 03–04', trimestre: 3, subject: 2 },
+  { type: 'compo', tag: 'Composition 3ème Trim', title: 'Composition du 3ème trimestre — Sujet 3', desc: 'Compréhension et production — Projets 03 & 04.', proj: 'Projets 03–04', trimestre: 3, subject: 3 },
+  
+  { type: 'test', tag: 'Test de niveau', title: 'Pré-bac blanc — Simulation', desc: 'Épreuve complète de simulation baccalauréat.', proj: 'Bac blanc', trimestre: 4 }
+];
+
+const DOCS = [
+  { icon: '📅', title: 'Progression annuelle', desc: 'Guide de progression pour les 26 semaines — 4 projets.' },
+  { icon: '📘', title: 'Programme officiel', desc: 'Curricula et objectifs pédagogiques — Édition en vigueur.' },
+  { icon: '📗', title: 'Document d\'accompagnement', desc: 'Ressources pour l\'implémentation du programme.' },
+  { icon: '⚖️', title: 'Loi d\'orientation', desc: 'Cadre réglementaire de l\'éducation nationale.' },
+  { icon: '📝', title: 'Guide d\'élaboration des sujets', desc: 'Méthodologie d\'examen 2017 — Baccalauréat.' },
+  { icon: '📊', title: 'Grilles d\'évaluation', desc: 'Critères officiels pour les productions écrites et orales.' }
+];
+
+function buildRubrics(projNum, seqNum) {
+  const p = projNum + 1; // Convert to 1-based
+  const s = seqNum + 1;
+  
+  return [
+    { 
+      num: 1,
+      title: 'Lancement du projet',
+      icon: '🚀',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof', filename: `lancement_projet${p}.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant', filename: `lancement_projet${p}_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 2,
+      title: 'Évaluation diagnostique',
+      icon: '📊',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof', filename: `eval_diagnostic_projet${p}.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant', filename: `eval_diagnostic_projet${p}_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 3,
+      title: 'Compréhension de l\'oral',
+      icon: '🎧',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof', filename: `comprehension_oral_projet${p}_seq${s}.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant', filename: `comprehension_oral_projet${p}_seq${s}_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 4,
+      title: 'Production de l\'oral',
+      icon: '🎤',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof', filename: `production_oral_projet${p}_seq${s}.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant', filename: `production_oral_projet${p}_seq${s}_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 5,
+      title: 'Compréhension de l\'écrit',
+      icon: '📄',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof 1', filename: `comprehension_ecrit_projet${p}_seq${s}_1.pdf`, type: 'pdf' },
+          { label: 'Fiche prof 2', filename: `comprehension_ecrit_projet${p}_seq${s}_2.pdf`, type: 'pdf' },
+          { label: 'Fiche prof 3', filename: `comprehension_ecrit_projet${p}_seq${s}_3.pdf`, type: 'pdf' },
+          { label: 'Fiche prof 4', filename: `comprehension_ecrit_projet${p}_seq${s}_4.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant 1', filename: `comprehension_ecrit_projet${p}_seq${s}_1_eleve.pdf`, type: 'pdf' },
+          { label: 'Fiche apprenant 2', filename: `comprehension_ecrit_projet${p}_seq${s}_2_eleve.pdf`, type: 'pdf' },
+          { label: 'Fiche apprenant 3', filename: `comprehension_ecrit_projet${p}_seq${s}_3_eleve.pdf`, type: 'pdf' },
+          { label: 'Fiche apprenant 4', filename: `comprehension_ecrit_projet${p}_seq${s}_4_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 6,
+      title: 'Production de l\'écrit',
+      icon: '✍️',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Fiche prof', filename: `production_ecrit_projet${p}_seq${s}.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Fiche apprenant', filename: `production_ecrit_projet${p}_seq${s}_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    },
+    { 
+      num: 7,
+      title: 'Remédiation',
+      icon: '🔄',
+      hasDetail: true,
+      files: {
+        prof: [
+          { label: 'Exercices de remédiation', filename: `remediation_projet${p}_seq${s}_exercices.pdf`, type: 'pdf' },
+          { label: 'Fiche de synthèse', filename: `remediation_projet${p}_seq${s}_synthese.pdf`, type: 'pdf' },
+          { label: 'Boite à outil et vocabulaire', filename: `remediation_projet${p}_seq${s}_outils.pdf`, type: 'pdf' }
+        ],
+        apprenant: [
+          { label: 'Exercices de remédiation', filename: `remediation_projet${p}_seq${s}_exercices_eleve.pdf`, type: 'pdf' },
+          { label: 'Fiche de synthèse', filename: `remediation_projet${p}_seq${s}_synthese_eleve.pdf`, type: 'pdf' },
+          { label: 'Boite à outil et vocabulaire', filename: `remediation_projet${p}_seq${s}_outils_eleve.pdf`, type: 'pdf' }
+        ]
+      }
+    }
+  ];
+}
+
+// ═══ NAVIGATION ═══
+function navigate(view, param) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(a => { a.className = 'nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-slate-500 hover:text-slate-800 hover:bg-slate-100'; });
+
+  if (view === 'home') {
+    document.getElementById('view-home').classList.add('active');
+    document.getElementById('nav-home').className = 'nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50';
+  } else if (view === 'project') {
+    renderProject(param);
+    document.getElementById('view-project').classList.add('active');
+  } else if (view === 'sequence') {
+    renderSequence(param.proj, param.seq);
+    document.getElementById('view-sequence').classList.add('active');
+  } else if (view === 'evals') {
+    document.getElementById('view-evals').classList.add('active');
+    document.getElementById('nav-evals').className = 'nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50';
+    renderEvals('all');
+  } else if (view === 'docs') {
+    document.getElementById('view-docs').classList.add('active');
+    document.getElementById('nav-docs').className = 'nav-link active px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all text-emerald-700 bg-emerald-50';
+    renderDocs();
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// ═══ RENDER ═══
+const colorMap = { emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', hover: 'hover:border-emerald-400' }, amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700', hover: 'hover:border-amber-400' }, rose: { bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-700', hover: 'hover:border-rose-400' }, violet: { bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700', hover: 'hover:border-violet-400' } };
+
+function renderProjectsGrid() {
+  const grid = document.getElementById('projects-grid');
+  grid.innerHTML = PROJECTS.map((p, i) => {
+    const c = colorMap[p.color];
+    const projNum = i + 1;
+    return `<div class="bg-white border border-slate-200 rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg ${c.hover}" onclick="navigate('project', ${i})">
+      <div class="p-5">
+        <div class="w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center text-2xl mb-4">${p.icon}</div>
+        <h3 class="font-semibold text-sm text-slate-900 mb-2 leading-snug"><span class="text-xs font-bold text-slate-400">PROJET 0${projNum}</span><br>${p.title}</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">${p.desc.substring(0, 80)}…</p>
+      </div>
+      <div class="border-t border-slate-100 px-5 py-3 flex items-center justify-between">
+        <span class="text-[11px] text-slate-400">${p.sequences.length} séquence(s)</span>
+        <span class="text-xs font-semibold ${c.text} flex items-center gap-1">Explorer <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+      </div>
+    </div>`;
+  }).join('');
+  lucide.createIcons();
+}
+
+function renderProject(idx) {
+  const p = PROJECTS[idx];
+  const projNum = idx + 1;
+  document.getElementById('proj-breadcrumb').innerHTML = `<button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="navigate('home')"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour</button><span class="text-slate-300 mx-2">›</span><span>Projet 0${projNum}</span>`;
+  document.getElementById('proj-title').innerHTML = `Projet 0${projNum}: ${p.title}`;
+  document.getElementById('proj-desc').textContent = p.desc;
+
+  const c = colorMap[p.color];
+  document.getElementById('seq-grid').innerHTML = p.sequences.map((s, si) => `
+    <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md ${c.hover} flex gap-4" onclick="navigate('sequence', {proj:${idx}, seq:${si}})">
+      <div class="w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center font-heading font-bold ${c.text} flex-shrink-0">${String(si+1).padStart(2,'0')}</div>
+      <div>
+        <h4 class="font-semibold text-sm mb-1">${s.title}</h4>
+        <p class="text-xs text-slate-400 leading-relaxed mb-3">${s.goal}</p>
+        <div class="flex gap-2">
+          <span class="text-[10px] font-semibold px-2.5 py-1 rounded-full ${c.bg} ${c.text}">6 ressources</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('bac-grid').innerHTML = p.bac.map(b => `
+    <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="text-lg">📄</span>
+        <div><div class="text-sm font-medium">${b.name}</div><div class="text-[10px] text-slate-400 uppercase tracking-wider">${b.type}</div></div>
+      </div>
+      <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg hover:bg-amber-100 transition-all flex items-center gap-1" onclick="showToast('Téléchargement : ${b.name}')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
+    </div>
+  `).join('');
+  lucide.createIcons();
+}
+
+function getPDFUrl(filename) {
+  const baseUrl = 'https://raw.githubusercontent.com/profboumediene-prog/atelier-pes/main/fichiers_pdf/';
+  return baseUrl + filename;
+}
+
+function downloadPDF(filename, label) {
+  const url = getPDFUrl(filename);
+  window.open(url, '_blank');
+  showToast(`📥 Ouverture : ${label}`);
+}
+
+function renderSequence(projIdx, seqIdx) {
+  const p = PROJECTS[projIdx];
+  const s = p.sequences[seqIdx];
+  const projNum = projIdx + 1;
+
+  // Build rubrics on-demand with correct project and sequence numbers
+  if (!s.rubrics) {
+    s.rubrics = buildRubrics(projIdx, seqIdx);
+  }
+
+  document.getElementById('seq-breadcrumb').innerHTML = `
+    <button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="navigate('project', ${projIdx})"><i data-lucide="arrow-left" class="w-4 h-4"></i> Retour</button><span class="text-slate-300 mx-2">›</span>
+    <span class="text-slate-600">${s.title}</span>`;
+  document.getElementById('seq-title').innerHTML = `${p.title} — ${s.title}`;
+  document.getElementById('seq-goal').textContent = s.goal;
+
+  // Render rubrics as clickable cards with detail view
+  const contentDiv = document.getElementById('comp-content');
+  contentDiv.className = 'max-w-6xl mx-auto px-6 py-8';
+  contentDiv.innerHTML = s.rubrics.map((r, idx) => `
+    <div class="mb-6" id="rubric-${idx}">
+      <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all hover:-translate-y-0.5 flex items-start justify-between" onclick="toggleRubricDetail(${idx})">
+        <div class="flex items-start gap-4 flex-1">
+          <div class="flex-shrink-0">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center font-heading font-bold text-emerald-700">
+              ${r.num}
+            </div>
+          </div>
+          <div>
+            <h3 class="font-heading font-bold text-lg text-slate-900 flex items-center gap-2">
+              <span class="text-xl">${r.icon}</span> ${r.title}
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">Cliquez pour voir les détails</p>
+          </div>
+        </div>
+        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 flex-shrink-0 transition-transform rubric-toggle-${idx}"></i>
       </div>
       
-      <form id="login-form">
-        <div class="space-y-4">
+      <!-- Detail view (hidden by default) -->
+      <div class="rubric-detail-${idx} hidden mt-4 bg-slate-50 border border-slate-200 rounded-xl p-6" id="detail-${idx}">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Prof Column -->
           <div>
-            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">Adresse Email</label>
-            <input type="email" id="login-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-emerald-500 focus:outline-none" placeholder="votre.email@exemple.com">
+            <h4 class="font-semibold text-sm text-slate-900 mb-4 flex items-center gap-2">
+              <span class="w-6 h-6 rounded bg-amber-100 flex items-center justify-center text-[11px] font-bold text-amber-700">👨‍🏫</span>
+              Fiches Professeur
+            </h4>
+            <div class="space-y-2">
+              ${r.files.prof.map(item => `
+                <div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between hover:shadow-sm transition-all">
+                  <div class="flex-1">
+                    <div class="text-sm font-medium text-slate-900">${item.label}</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">
+                      ${item.type === 'pdf' ? '📄 PDF' : item.type === 'audio' ? '🎧 Audio' : '🎬 Vidéo'}
+                    </div>
+                  </div>
+                  <button class="bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg hover:bg-emerald-100 transition-all flex-shrink-0 ml-2 flex items-center gap-1" onclick="downloadPDF('${item.filename}', '${item.label}')">
+                    <i data-lucide="download" class="w-3 h-3"></i>
+                  </button>
+                </div>
+              `).join('')}
+            </div>
           </div>
+          
+          <!-- Apprenant Column -->
           <div>
-            <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">Code Secret d'accès</label>
-            <input type="password" id="login-password" required class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:border-emerald-500 focus:outline-none" placeholder="••••••••">
+            <h4 class="font-semibold text-sm text-slate-900 mb-4 flex items-center gap-2">
+              <span class="w-6 h-6 rounded bg-blue-100 flex items-center justify-center text-[11px] font-bold text-blue-700">👨‍🎓</span>
+              Fiches Apprenant
+            </h4>
+            <div class="space-y-2">
+              ${r.files.apprenant.map(item => `
+                <div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between hover:shadow-sm transition-all">
+                  <div class="flex-1">
+                    <div class="text-sm font-medium text-slate-900">${item.label}</div>
+                    <div class="text-[10px] text-slate-400 uppercase tracking-wider mt-0.5">
+                      ${item.type === 'pdf' ? '📄 PDF' : item.type === 'audio' ? '🎧 Audio' : '🎬 Vidéo'}
+                    </div>
+                  </div>
+                  <button class="bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-all flex-shrink-0 ml-2 flex items-center gap-1" onclick="downloadPDF('${item.filename}', '${item.label}')">
+                    <i data-lucide="download" class="w-3 h-3"></i>
+                  </button>
+                </div>
+              `).join('')}
+            </div>
           </div>
-          <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm py-3 rounded-xl transition-all shadow-lg shadow-emerald-100 flex items-center justify-center gap-2">
-            <i data-lucide="lock" class="w-4 h-4"></i> Déverrouiller l'Atelier
-          </button>
-        </div>
-        <p id="auth-error" class="text-xs text-rose-500 text-center mt-3 hidden"></p>
-      </form>
-    </div>
-  </div>
-
-  <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-8 h-16 flex items-center justify-between">
-    <a class="flex items-center gap-3 cursor-pointer" onclick="window.navigate('home')">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg font-heading">F</div>
-      <div>
-        <div class="font-heading font-bold text-xs text-slate-400 uppercase tracking-wider" id="header-org">L'Atelier des PES de français</div>
-        <div class="font-heading font-bold text-sm text-slate-900" id="header-title">L'Atelier des PES</div>
-        <div class="text-[11px] text-emerald-600 font-medium" id="header-subtitle">3ème Année Secondaire</div>
-      </div>
-    </a>
-    <nav class="hidden md:flex items-center gap-1">
-      <a onclick="window.navigate('home')" id="nav-home" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Accueil</a>
-      <a onclick="window.navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Évaluations</a>
-      <a onclick="window.navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Documents officiels</a>
-      <button onclick="window.handleLogout()" class="ml-4 text-xs bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 px-3 py-1.5 rounded-lg transition-all">Déconnexion</button>
-    </nav>
-    <button class="md:hidden p-2 rounded-lg hover:bg-slate-100" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
-      <i data-lucide="menu" class="w-5 h-5"></i>
-    </button>
-  </header>
-
-  <div id="mobile-nav" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-40 p-4 flex flex-col gap-2 shadow-lg">
-    <a onclick="window.navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a>
-    <a onclick="window.navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a>
-    <a onclick="window.navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
-    <button onclick="window.handleLogout(); document.getElementById('mobile-nav').classList.add('hidden')" class="w-full text-left text-rose-600 px-4 py-3 rounded-lg text-sm font-medium hover:bg-rose-50">🚪 Déconnexion</button>
-  </div>
-
-  <div class="view active" id="view-home">
-    <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-16 px-6 text-center">
-      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #10b981 1px, transparent 0); background-size: 32px 32px;"></div>
-      <div class="relative max-w-2xl mx-auto">
-        <span class="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-4 py-1.5 rounded-full mb-6 border border-emerald-200">✦ Niveau 3ème Année Secondaire</span>
-        <h1 class="font-heading text-3xl md:text-5xl font-bold text-slate-900 leading-tight mb-4" id="hero-heading">Ressources pédagogiques<br>pour le <span class="text-emerald-600">français</span></h1>
-        <p class="text-slate-500 text-base md:text-lg leading-relaxed max-w-lg mx-auto mb-8" id="hero-desc">Fiches pédagogiques, supports apprenants, évaluations et documents officiels — tout pour vos séquences en 3AS.</p>
-        <div class="flex gap-3 justify-center flex-wrap">
-          <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-emerald-200 flex items-center gap-2" onclick="document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})">
-            <i data-lucide="book-open" class="w-4 h-4"></i> Explorer les projets
-          </button>
-          <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="window.navigate('docs')">
-            <i data-lucide="file-text" class="w-4 h-4"></i> Documents officiels
-          </button>
         </div>
       </div>
     </div>
+  `).join('');
 
-    <div class="flex justify-center flex-wrap gap-0 border-y border-slate-200 bg-white">
-      <div class="px-8 py-5 text-center border-r border-slate-100 last:border-r-0"><div class="font-heading text-2xl font-bold text-emerald-600">4</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Projets</div></div>
-      <div class="px-8 py-5 text-center border-r border-slate-100"><div class="font-heading text-2xl font-bold text-emerald-600">6</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Séquences</div></div>
-      <div class="px-8 py-5 text-center border-r border-slate-100"><div class="font-heading text-2xl font-bold text-emerald-600">6</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Compétences</div></div>
-      <div class="px-8 py-5 text-center"><div class="font-heading text-2xl font-bold text-emerald-600">90+</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Ressources</div></div>
+  // Remove the old tabs
+  document.getElementById('comp-tabs').innerHTML = '';
+  lucide.createIcons();
+}
+
+function toggleRubricDetail(idx) {
+  const detail = document.querySelector(`.rubric-detail-${idx}`);
+  const toggle = document.querySelector(`.rubric-toggle-${idx}`);
+  detail.classList.toggle('hidden');
+  toggle.style.transform = detail.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+function getEvalFilename(e) {
+  if (e.type === 'test') {
+    if (e.trimestre === 0) return 'eval_diagnostic_rentre.pdf';
+    if (e.trimestre === 4) return 'bac_blanc_simulation.pdf';
+  }
+  if (e.type === 'devoir') {
+    return `devoir_trimestre${e.trimestre}_sujet${e.subject}.pdf`;
+  }
+  if (e.type === 'compo') {
+    return `composition_trimestre${e.trimestre}_sujet${e.subject}.pdf`;
+  }
+  return 'document.pdf';
+}
+
+function renderEvals(type) {
+  let filtered = EVALS;
+  
+  if (type === 'trim1') filtered = EVALS.filter(e => e.trimestre === 1);
+  else if (type === 'trim2') filtered = EVALS.filter(e => e.trimestre === 2);
+  else if (type === 'trim3') filtered = EVALS.filter(e => e.trimestre === 3);
+  else if (type !== 'all') filtered = EVALS.filter(e => e.type === type);
+  
+  const tagStyles = { devoir: 'bg-amber-50 text-amber-700 border-amber-200', compo: 'bg-rose-50 text-rose-700 border-rose-200', test: 'bg-violet-50 text-violet-700 border-violet-200' };
+  document.getElementById('evals-grid').innerHTML = filtered.map(e => `
+    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all">
+      <div class="p-5">
+        <span class="inline-block text-[10px] font-bold px-2.5 py-1 rounded-full border mb-3 ${tagStyles[e.type]}">${e.tag}</span>
+        <div class="font-semibold text-sm mb-2">${e.title}</div>
+        <div class="text-xs text-slate-400 leading-relaxed">${e.desc}</div>
+      </div>
+      <div class="border-t border-slate-100 px-5 py-3 flex justify-between items-center">
+        <span class="text-[11px] text-slate-400">📁 ${e.proj}</span>
+        <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg hover:bg-amber-100 transition-all flex items-center gap-1" onclick="downloadPDF('${getEvalFilename(e)}', '${e.title.replace(/'/g,' ')}')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
+      </div>
     </div>
+  `).join('');
+  lucide.createIcons();
+}
 
-    <div class="max-w-6xl mx-auto px-6 py-12" id="projects-section">
-      <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Les 4 projets de l'année</h2>
-      <p class="text-slate-400 text-sm mb-8">Programme officiel — Filières Lettres & Philosophie / Langues Étrangères</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="projects-grid"></div>
+function setEvalFilter(type) {
+  document.querySelectorAll('.eval-filter-btn').forEach(b => { b.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-slate-200 text-slate-500 hover:border-slate-300 transition-all'; });
+  const btn = document.getElementById('ef-'+type);
+  if (btn) btn.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-emerald-200 bg-emerald-50 text-emerald-700 transition-all active';
+  renderEvals(type);
+}
+
+function renderDocs() {
+  document.getElementById('docs-grid').innerHTML = DOCS.map(d => `
+    <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all" onclick="showModal('${d.title}', '${d.desc}')">
+      <div class="text-3xl mb-3">${d.icon}</div>
+      <div class="font-semibold text-sm mb-2">${d.title}</div>
+      <div class="text-xs text-slate-400 leading-relaxed mb-4">${d.desc}</div>
+      <button class="bg-blue-50 border border-blue-200 text-blue-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-all flex items-center gap-1"><i data-lucide="download" class="w-3 h-3"></i> Télécharger</button>
     </div>
+  `).join('');
+  lucide.createIcons();
+}
 
-    <div class="max-w-6xl mx-auto px-6 pb-12">
-      <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Accès rapide</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-amber-300 hover:-translate-y-0.5 transition-all" onclick="window.navigate('evals'); setTimeout(()=>window.setEvalFilter('devoir'),100)">
-          <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-xl">📝</div>
-          <div><div class="font-semibold text-sm">Devoirs surveillés</div>
+// ═══ MODAL & TOAST ═══
+function showModal(title, desc) {
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-desc').textContent = desc;
+  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('modal').classList.add('flex');
+}
+function closeModal(e) { if (e.target === document.getElementById('modal')) { document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex'); } }
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; }, 3000);
+}
+
+// ═══ INIT ═══
+renderProjectsGrid();
+renderDocs();
+lucide.createIcons();
+
+// ═══ ELEMENT SDK ═══
+const defaultConfig = {
+  background_color: '#f8fafc',
+  surface_color: '#ffffff',
+  text_color: '#1e293b',
+  primary_color: '#059669',
+  secondary_color: '#d97706',
+  font_family: 'DM Sans',
+  font_size: 14,
+  site_title: "L'Atelier des PES",
+  site_subtitle: '3ème Année Secondaire',
+  hero_heading: 'Ressources pédagogiques pour le français',
+  hero_description: 'Fiches pédagogiques, supports apprenants, évaluations et documents officiels — tout pour vos séquences en 3AS.'
+};
+
+async function onConfigChange(config) {
+  const bg = config.background_color || defaultConfig.background_color;
+  const surface = config.surface_color || defaultConfig.surface_color;
+  const text = config.text_color || defaultConfig.text_color;
+  const primary = config.primary_color || defaultConfig.primary_color;
+  const font = config.font_family || defaultConfig.font_family;
+  const size = config.font_size || defaultConfig.font_size;
+
+  document.body.style.backgroundColor = bg;
+  document.body.style.color = text;
+  document.body.style.fontFamily = `${font}, sans-serif`;
+  document.body.style.fontSize = `${size}px`;
+
+  const title = config.site_title || defaultConfig.site_title;
+  const subtitle = config.site_subtitle || defaultConfig.site_subtitle;
+  document.getElementById('header-title').textContent = title;
+  document.getElementById('header-subtitle').textContent = subtitle;
+
+  const heading = config.hero_heading || defaultConfig.hero_heading;
+  const desc = config.hero_description || defaultConfig.hero_description;
+  document.getElementById('hero-heading').innerHTML = heading.replace('français', '<span class="text-emerald-600">français</span>');
+  document.getElementById('hero-desc').textContent = desc;
+}
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange,
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+      { get: () => config.primary_color || defaultConfig.primary_color, set: (v) => { config.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+      { get: () => config.secondary_color || defaultConfig.secondary_color, set: (v) => { config.secondary_color = v; window.elementSdk.setConfig({ secondary_color: v }); } }
+    ],
+    borderables: [],
+    fontEditable: { get: () => config.font_family || defaultConfig.font_family, set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+    fontSizeable: { get: () => config.font_size || defaultConfig.font_size, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['site_title', config.site_title || defaultConfig.site_title],
+    ['site_subtitle', config.site_subtitle || defaultConfig.site_subtitle],
+    ['hero_heading', config.hero_heading || defaultConfig.hero_heading],
+    ['hero_description', config.hero_description || defaultConfig.hero_description]
+  ])
+});
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a056dfaa798fd07d',t:'MTc4MDQwNzY2Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

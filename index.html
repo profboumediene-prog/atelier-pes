@@ -6,7 +6,6 @@
   <title>L'Atelier des PES — 3ème Année Secondaire</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Fraunces:wght@400;600;700;900&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -30,32 +29,9 @@
     ::-webkit-scrollbar-track { background: #f8fafc; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
   </style>
-
-  <!-- Configuration Firebase de Fethallah -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAlpzmU2xpqd_7W5niUwhAhLz_fJvPvsB4",
-      authDomain: "atelier-pes-3as.firebaseapp.com",
-      projectId: "atelier-pes-3as",
-      storageBucket: "atelier-pes-3as.firebasestorage.app",
-      messagingSenderId: "381672233943",
-      appId: "1:381672233943:web:af883598ae0c34bce38992",
-      measurementId: "G-Q2C80FHQEY"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    // Enregistrement global pour le reste du script HTML
-    window.authService = { auth, signInWithEmailAndPassword, onAuthStateChanged, signOut };
-  </script>
 </head>
 <body class="h-full bg-slate-50 text-slate-800 overflow-auto">
 
-  <!-- ÉCRAN DE VERROUILLAGE INITIAL (Masque le site par défaut) -->
   <div id="auth-screen" class="fixed inset-0 z-[400] bg-slate-950 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl border border-slate-100">
       <div class="text-center mb-6">
@@ -64,7 +40,7 @@
         <p class="text-xs text-slate-400 mt-1">Espace sécurisé — Veuillez introduire vos accès membres</p>
       </div>
       
-      <form id="login-form" onsubmit="handleLogin(event)">
+      <form id="login-form" onsubmit="window.handleLogin(event)">
         <div class="space-y-4">
           <div>
             <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">Adresse Email</label>
@@ -83,9 +59,8 @@
     </div>
   </div>
 
-  <!-- ZONE DE CONTENU PRINCIPALE (S'affiche après connexion) -->
   <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 md:px-8 h-16 flex items-center justify-between">
-    <a class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+    <a class="flex items-center gap-3 cursor-pointer" onclick="window.navigate('home')">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center text-white font-bold text-lg font-heading">F</div>
       <div>
         <div class="font-heading font-bold text-xs text-slate-400 uppercase tracking-wider" id="header-org">L'Atelier des PES de français</div>
@@ -94,25 +69,23 @@
       </div>
     </a>
     <nav class="hidden md:flex items-center gap-1">
-      <a onclick="navigate('home')" id="nav-home" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Accueil</a>
-      <a onclick="navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Évaluations</a>
-      <a onclick="navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Documents officiels</a>
-      <button onclick="handleLogout()" class="ml-4 text-xs bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 px-3 py-1.5 rounded-lg transition-all">Déconnexion</button>
+      <a onclick="window.navigate('home')" id="nav-home" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Accueil</a>
+      <a onclick="window.navigate('evals')" id="nav-evals" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Évaluations</a>
+      <a onclick="window.navigate('docs')" id="nav-docs" class="nav-link px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-all">Documents officiels</a>
+      <button onclick="window.handleLogout()" class="ml-4 text-xs bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-600 px-3 py-1.5 rounded-lg transition-all">Déconnexion</button>
     </nav>
     <button class="md:hidden p-2 rounded-lg hover:bg-slate-100" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
       <i data-lucide="menu" class="w-5 h-5"></i>
     </button>
   </header>
 
-  <!-- Mobile Menu -->
   <div id="mobile-nav" class="hidden md:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-40 p-4 flex flex-col gap-2 shadow-lg">
-    <a onclick="navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a>
-    <a onclick="navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a>
-    <a onclick="navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
-    <button onclick="handleLogout(); document.getElementById('mobile-nav').classList.add('hidden')" class="w-full text-left text-rose-600 px-4 py-3 rounded-lg text-sm font-medium hover:bg-rose-50">🚪 Déconnexion</button>
+    <a onclick="window.navigate('home'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">🏠 Accueil</a>
+    <a onclick="window.navigate('evals'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📝 Évaluations</a>
+    <a onclick="window.navigate('docs'); document.getElementById('mobile-nav').classList.add('hidden')" class="px-4 py-3 rounded-lg text-sm font-medium cursor-pointer hover:bg-emerald-50 text-slate-700">📋 Documents officiels</a>
+    <button onclick="window.handleLogout(); document.getElementById('mobile-nav').classList.add('hidden')" class="w-full text-left text-rose-600 px-4 py-3 rounded-lg text-sm font-medium hover:bg-rose-50">🚪 Déconnexion</button>
   </div>
 
-  <!-- ═══ HOME VIEW ═══ -->
   <div class="view active" id="view-home">
     <div class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-16 px-6 text-center">
       <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #10b981 1px, transparent 0); background-size: 32px 32px;"></div>
@@ -124,14 +97,13 @@
           <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-emerald-200 flex items-center gap-2" onclick="document.getElementById('projects-section').scrollIntoView({behavior:'smooth'})">
             <i data-lucide="book-open" class="w-4 h-4"></i> Explorer les projets
           </button>
-          <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="navigate('docs')">
+          <button class="bg-white border border-slate-200 text-slate-700 font-semibold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5 hover:border-slate-300 flex items-center gap-2" onclick="window.navigate('docs')">
             <i data-lucide="file-text" class="w-4 h-4"></i> Documents officiels
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Stats -->
     <div class="flex justify-center flex-wrap gap-0 border-y border-slate-200 bg-white">
       <div class="px-8 py-5 text-center border-r border-slate-100 last:border-r-0"><div class="font-heading text-2xl font-bold text-emerald-600">4</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Projets</div></div>
       <div class="px-8 py-5 text-center border-r border-slate-100"><div class="font-heading text-2xl font-bold text-emerald-600">6</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Séquences</div></div>
@@ -139,30 +111,28 @@
       <div class="px-8 py-5 text-center"><div class="font-heading text-2xl font-bold text-emerald-600">90+</div><div class="text-[11px] text-slate-400 uppercase tracking-wider mt-1">Ressources</div></div>
     </div>
 
-    <!-- Projects Grid -->
     <div class="max-w-6xl mx-auto px-6 py-12" id="projects-section">
       <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Les 4 projets de l'année</h2>
       <p class="text-slate-400 text-sm mb-8">Programme officiel — Filières Lettres & Philosophie / Langues Étrangères</p>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="projects-grid"></div>
     </div>
 
-    <!-- Quick Access -->
     <div class="max-w-6xl mx-auto px-6 pb-12">
       <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Accès rapide</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-amber-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('devoir'),100)">
+        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-amber-300 hover:-translate-y-0.5 transition-all" onclick="window.navigate('evals'); setTimeout(()=>window.setEvalFilter('devoir'),100)">
           <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-xl">📝</div>
           <div><div class="font-semibold text-sm">Devoirs surveillés</div><div class="text-xs text-slate-400">Sujets prêts à l'emploi</div></div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-rose-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('compo'),100)">
+        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-rose-300 hover:-translate-y-0.5 transition-all" onclick="window.navigate('evals'); setTimeout(()=>window.setEvalFilter('compo'),100)">
           <div class="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center text-xl">📜</div>
           <div><div class="font-semibold text-sm">Compositions</div><div class="text-xs text-slate-400">Trimestrielles 3AS</div></div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-violet-300 hover:-translate-y-0.5 transition-all" onclick="navigate('evals'); setTimeout(()=>setEvalFilter('test'),100)">
+        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-violet-300 hover:-translate-y-0.5 transition-all" onclick="window.navigate('evals'); setTimeout(()=>window.setEvalFilter('test'),100)">
           <div class="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center text-xl">🔎</div>
           <div><div class="font-semibold text-sm">Tests de niveau</div><div class="text-xs text-slate-400">Évaluation diagnostique</div></div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-emerald-300 hover:-translate-y-0.5 transition-all" onclick="navigate('docs')">
+        <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center gap-4 cursor-pointer hover:border-emerald-300 hover:-translate-y-0.5 transition-all" onclick="window.navigate('docs')">
           <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-xl">📋</div>
           <div><div class="font-semibold text-sm">Docs officiels</div><div class="text-xs text-slate-400">Programme & progressions</div></div>
         </div>
@@ -174,7 +144,6 @@
     </footer>
   </div>
 
-  <!-- ═══ PROJECT VIEW ═══ -->
   <div class="view" id="view-project">
     <div class="bg-gradient-to-br from-emerald-50 to-white px-6 py-10 border-b border-slate-200">
       <div class="max-w-6xl mx-auto">
@@ -191,7 +160,6 @@
     </div>
   </div>
 
-  <!-- ═══ SEQUENCE VIEW ═══ -->
   <div class="view" id="view-sequence">
     <div class="bg-gradient-to-br from-teal-50 to-white px-6 py-10 border-b border-slate-200">
       <div class="max-w-6xl mx-auto">
@@ -203,12 +171,11 @@
     <div class="max-w-6xl mx-auto px-6 py-8" id="comp-content"></div>
   </div>
 
-  <!-- ═══ EVALS VIEW ═══ -->
   <div class="view" id="view-evals">
     <div class="bg-gradient-to-br from-amber-50 to-white px-6 py-10 border-b border-slate-200">
       <div class="max-w-6xl mx-auto">
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
-          <a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Évaluations</span>
+          <a class="text-emerald-600 cursor-pointer hover:underline" onclick="window.navigate('home')">Accueil</a><span>›</span><span>Évaluations</span>
         </div>
         <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Évaluations</h2>
         <p class="text-slate-500 text-sm">Devoirs surveillés, compositions trimestrielles et tests de niveau</p>
@@ -217,27 +184,26 @@
     <div class="max-w-6xl mx-auto px-6 py-8">
       <div class="mb-6">
         <div class="flex gap-2 flex-wrap mb-4">
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-all" onclick="setEvalFilter('all')">Toutes les évaluations</button>
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim1" onclick="setEvalFilter('trim1')">📅 1er Trimestre</button>
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim2" onclick="setEvalFilter('trim2')">📅 2ème Trimestre</button>
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim3" onclick="setEvalFilter('trim3')">📅 3ème Trimestre</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-all" onclick="window.setEvalFilter('all')">Toutes les évaluations</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim1" onclick="window.setEvalFilter('trim1')">📅 1er Trimestre</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim2" onclick="window.setEvalFilter('trim2')">📅 2ème Trimestre</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-trim3" onclick="window.setEvalFilter('trim3')">📅 3ème Trimestre</button>
         </div>
         <div class="flex gap-2 flex-wrap">
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-devoir" onclick="setEvalFilter('devoir')">📝 Devoirs</button>
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-compo" onclick="setEvalFilter('compo')">📜 Compositions</button>
-          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-test" onclick="setEvalFilter('test')">🔎 Tests</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-devoir" onclick="window.setEvalFilter('devoir')">📝 Devoirs</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-compo" onclick="window.setEvalFilter('compo')">📜 Compositions</button>
+          <button class="eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border transition-all" id="ef-test" onclick="window.setEvalFilter('test')">🔎 Tests</button>
         </div>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="evals-grid"></div>
     </div>
   </div>
 
-  <!-- ═══ DOCS VIEW ═══ -->
   <div class="view" id="view-docs">
     <div class="bg-gradient-to-br from-blue-50 to-white px-6 py-10 border-b border-slate-200">
       <div class="max-w-6xl mx-auto">
         <div class="flex items-center gap-2 text-xs text-slate-400 mb-4">
-          <a class="text-emerald-600 cursor-pointer hover:underline" onclick="navigate('home')">Accueil</a><span>›</span><span>Documents officiels</span>
+          <a class="text-emerald-600 cursor-pointer hover:underline" onclick="window.navigate('home')">Accueil</a><span>›</span><span>Documents officiels</span>
         </div>
         <h2 class="font-heading text-2xl font-bold text-slate-900 mb-2">Documents officiels</h2>
         <p class="text-slate-500 text-sm">Textes de référence et guides pédagogiques nationaux</p>
@@ -248,19 +214,17 @@
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
   <div class="fixed bottom-6 left-1/2 -translate-x-1/2 translate-y-20 bg-white border border-emerald-200 shadow-xl text-slate-800 px-5 py-3 rounded-xl text-sm font-medium z-[300] flex items-center gap-2 transition-transform duration-300 pointer-events-none" id="toast">
     <span class="text-emerald-600">✔</span> <span id="toast-msg"></span>
   </div>
 
-  <!-- MODAL -->
-  <div class="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal" onclick="closeModal(event)">
+  <div class="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm hidden items-center justify-center p-4" id="modal" onclick="window.closeModal(event)">
     <div class="bg-white rounded-2xl p-6 max-w-md w-full relative shadow-2xl" onclick="event.stopPropagation()">
       <button class="absolute top-4 right-4 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-500" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">✕</button>
       <h3 class="font-heading text-xl font-bold text-slate-900 mb-2" id="modal-title"></h3>
       <p class="text-sm text-slate-500 leading-relaxed mb-6" id="modal-desc"></p>
       <div class="flex gap-3">
-        <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all flex items-center gap-2" onclick="downloadSecureFile('guide_programme_officiel.pdf'); document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">
+        <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-5 py-2.5 rounded-xl transition-all flex items-center gap-2" onclick="window.downloadSecureFile('guide_programme_officiel.pdf'); document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">
           <i data-lucide="download" class="w-4 h-4"></i> Télécharger
         </button>
         <button class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm px-5 py-2.5 rounded-xl transition-all" onclick="document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex')">Annuler</button>
@@ -268,12 +232,28 @@
     </div>
   </div>
 
-  <script>
-    // ═══ CONFIGURATION DES DONNÉES ═══
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // 1. Initialisation Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAlpzmU2xpqd_7W5niUwhAhLz_fJvPvsB4",
+      authDomain: "atelier-pes-3as.firebaseapp.com",
+      projectId: "atelier-pes-3as",
+      storageBucket: "atelier-pes-3as.firebasestorage.app",
+      messagingSenderId: "381672233943",
+      appId: "1:381672233943:web:af883598ae0c34bce38992",
+      measurementId: "G-Q2C80FHQEY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // 2. Données de l'application
     const PROJECTS = [
       {
-        title: "Textes et documents d'histoire",
-        icon: '📖', color: 'emerald',
+        title: "Textes et documents d'histoire", icon: '📖', color: 'emerald',
         desc: "Concevoir une recherche documentaire sur un événement historique afin d'en réaliser une synthèse objective ou incluant des témoignages authentiques.",
         sequences: [
           { title: 'Séquence 01', goal: "Produire un texte pour informer d'un fait d'histoire de manière objective", rubrics: buildRubrics() },
@@ -282,8 +262,7 @@
         bac: [{ name: 'Sujet d\'Histoire - Épreuve Officielle', type: 'Sujet Bac' }, { name: 'Le Compte rendu objectif', type: 'Corrigé type' }]
       },
       {
-        title: "Le débat d'idées",
-        icon: '💬', color: 'amber',
+        title: "Le débat d'idées", icon: '💬', color: 'amber',
         desc: "Prendre position au sein d'un échange d'idées (confronter des thèses, concéder et réfuter) sur une thématique d'actualité sociale.",
         sequences: [
           { title: 'Séquence 01', goal: "Produire un texte pour convaincre ou persuader — S'inscrire dans un débat", rubrics: buildRubrics() },
@@ -313,25 +292,18 @@
       ];
     }
 
-    // ═══ CONTROLLER DE SÉCURITÉ FIREBASE ═══
-    document.addEventListener("DOMContentLoaded", () => {
-      const { auth, onAuthStateChanged } = window.authService;
-      
-      onAuthStateChanged(auth, (user) => {
-        const authScreen = document.getElementById('auth-screen');
-        if (user) {
-          authScreen.classList.add('hidden');
-          showToast("Accès validé : " + user.email);
-          renderProjectsGrid(); // Lancement de l'affichage une fois connecté
-        } else {
-          authScreen.classList.remove('hidden');
-        }
-      });
-    });
+    // 3. Fonctions Globales attachées à window (pour que le HTML puisse les lire)
+    let toastTimer;
+    window.showToast = function(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      t.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; }, 3000);
+    };
 
-    async function handleLogin(e) {
+    window.handleLogin = async function(e) {
       e.preventDefault();
-      const { auth, signInWithEmailAndPassword } = window.authService;
       const email = document.getElementById('login-email').value;
       const password = document.getElementById('login-password').value;
       const errorEl = document.getElementById('auth-error');
@@ -343,35 +315,23 @@
         errorEl.textContent = "Accès refusé. Email ou code secret erroné.";
         errorEl.classList.remove('hidden');
       }
-    }
+    };
 
-    async function handleLogout() {
-      const { auth, signOut } = window.authService;
+    window.handleLogout = async function() {
       await signOut(auth);
-    }
+    };
 
-    // ═══ JETON DE TÉLÉCHARGEMENT SÉCURISÉ (Lien masqué) ═══
-    function downloadSecureFile(fileName) {
-      const { auth } = window.authService;
-
-      // Si l'utilisateur n'est pas connecté sur Firebase, on coupe net
+    window.downloadSecureFile = function(fileName) {
       if (!auth.currentUser) {
-        showToast("❌ Accès refusé : Veuillez vous connecter avec vos identifiants.");
+        window.showToast("❌ Accès refusé : Veuillez vous connecter avec vos identifiants.");
         return;
       }
-
-      showToast("🔄 Vérification des droits... Téléchargement démarré.");
-
-      // Racine de votre sous-dossier GitHub Pages (Inaccessible sans passer le filtre au-dessus)
+      window.showToast("🔄 Vérification des droits... Téléchargement démarré.");
       const baseSecureUrl = "https://profboumediene-prog.github.io/atelier-pes/fichiers_pdf/";
-      
-      setTimeout(() => {
-        window.open(baseSecureUrl + fileName, '_blank');
-      }, 800);
-    }
+      setTimeout(() => { window.open(baseSecureUrl + fileName, '_blank'); }, 800);
+    };
 
-    // ═══ SYSTEME DE NAVIGATION ═══
-    function navigate(view, param) {
+    window.navigate = function(view, param) {
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
       if (view === 'home') {
         document.getElementById('view-home').classList.add('active');
@@ -383,15 +343,43 @@
         document.getElementById('view-sequence').classList.add('active');
       } else if (view === 'evals') {
         document.getElementById('view-evals').classList.add('active');
-        setEvalFilter('all'); 
+        window.setEvalFilter('all'); 
       } else if (view === 'docs') {
         document.getElementById('view-docs').classList.add('active');
         renderDocs();
       }
       window.scrollTo({top: 0, behavior: 'smooth'});
-    }
+    };
 
-    // ═══ SYSTÈME DE RENDUS DYNAMIQUES ═══
+    window.toggleRubricDetail = function(idx) {
+      const detail = document.querySelector(`.rubric-detail-${idx}`);
+      const toggle = document.querySelector(`.rubric-toggle-${idx}`);
+      detail.classList.toggle('hidden');
+      if(toggle) toggle.style.transform = detail.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+    };
+
+    window.setEvalFilter = function(type) {
+      document.querySelectorAll('.eval-filter-btn').forEach(b => { b.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-slate-200 text-slate-500 hover:border-slate-300 transition-all'; });
+      const btn = document.getElementById('ef-'+type);
+      if (btn) btn.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-emerald-200 bg-emerald-50 text-emerald-700 transition-all active';
+      renderEvals(type);
+    };
+
+    window.showModal = function(title, desc) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    };
+    
+    window.closeModal = function(e) { 
+      if (e.target === document.getElementById('modal')) { 
+        document.getElementById('modal').classList.add('hidden'); 
+        document.getElementById('modal').classList.remove('flex'); 
+      } 
+    };
+
+    // 4. Fonctions de Rendu (Internes)
     const colorMap = { 
       emerald: { bg: 'bg-emerald-50', text: 'text-emerald-700', hover: 'hover:border-emerald-400' }, 
       amber: { bg: 'bg-amber-50', text: 'text-amber-700', hover: 'hover:border-amber-400' }
@@ -399,8 +387,8 @@
 
     function renderProjectsGrid() {
       document.getElementById('projects-grid').innerHTML = PROJECTS.map((p, i) => {
-        const c = colorMap[p.color];
-        return `<div class="bg-white border border-slate-200 rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg ${c.hover}" onclick="navigate('project', ${i})">
+        const c = colorMap[p.color] || colorMap.emerald; // Fallback
+        return `<div class="bg-white border border-slate-200 rounded-2xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg ${c.hover}" onclick="window.navigate('project', ${i})">
           <div class="p-5">
             <div class="w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center text-2xl mb-4">${p.icon}</div>
             <h3 class="font-semibold text-sm text-slate-900 mb-2 leading-snug"><span class="text-xs font-bold text-slate-400">PROJET 0${i+1}</span><br>${p.title}</h3>
@@ -417,13 +405,13 @@
 
     function renderProject(idx) {
       const p = PROJECTS[idx];
-      document.getElementById('proj-breadcrumb').innerHTML = `<button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="navigate('home')"><i data-lucide="arrow-left" class="w-4 h-4"></i> Accueil</button><span class="text-slate-300 mx-2">›</span><span>Projet 0${idx+1}</span>`;
+      document.getElementById('proj-breadcrumb').innerHTML = `<button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="window.navigate('home')"><i data-lucide="arrow-left" class="w-4 h-4"></i> Accueil</button><span class="text-slate-300 mx-2">›</span><span>Projet 0${idx+1}</span>`;
       document.getElementById('proj-title').innerHTML = `Projet 0${idx+1} : ${p.title}`;
       document.getElementById('proj-desc').textContent = p.desc;
 
-      const c = colorMap[p.color];
+      const c = colorMap[p.color] || colorMap.emerald;
       document.getElementById('seq-grid').innerHTML = p.sequences.map((s, si) => `
-        <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md ${c.hover} flex gap-4" onclick="navigate('sequence', {proj:${idx}, seq:${si}})">
+        <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer transition-all hover:-translate-y-1 hover:shadow-md ${c.hover} flex gap-4" onclick="window.navigate('sequence', {proj:${idx}, seq:${si}})">
           <div class="w-12 h-12 rounded-xl ${c.bg} flex items-center justify-center font-heading font-bold ${c.text} flex-shrink-0">${String(si+1).padStart(2,'0')}</div>
           <div>
             <h4 class="font-semibold text-sm mb-1">${s.title}</h4>
@@ -439,7 +427,7 @@
             <span class="text-lg">📄</span>
             <div><div class="text-sm font-medium">${b.name}</div><div class="text-[10px] text-slate-400 uppercase tracking-wider">${b.type}</div></div>
           </div>
-          <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1" onclick="downloadSecureFile('${b.name.toLowerCase().replace(/ /g, '_')}.pdf')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
+          <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1" onclick="window.downloadSecureFile('${b.name.toLowerCase().replace(/ /g, '_')}.pdf')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
         </div>
       `).join('');
       lucide.createIcons();
@@ -449,13 +437,13 @@
       const p = PROJECTS[projIdx];
       const s = p.sequences[seqIdx];
 
-      document.getElementById('seq-breadcrumb').innerHTML = `<button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="navigate('project', ${projIdx})"><i data-lucide="arrow-left" class="w-4 h-4"></i> Projet 0${projIdx+1}</button><span class="text-slate-300 mx-2">›</span><span class="text-slate-600">${s.title}</span>`;
+      document.getElementById('seq-breadcrumb').innerHTML = `<button class="inline-flex items-center gap-1 text-emerald-600 hover:text-emerald-700 transition-colors" onclick="window.navigate('project', ${projIdx})"><i data-lucide="arrow-left" class="w-4 h-4"></i> Projet 0${projIdx+1}</button><span class="text-slate-300 mx-2">›</span><span class="text-slate-600">${s.title}</span>`;
       document.getElementById('seq-title').innerHTML = `${s.title} — ${p.title}`;
 
       const contentDiv = document.getElementById('comp-content');
       contentDiv.innerHTML = s.rubrics.map((r, idx) => `
         <div class="mb-6">
-          <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all flex items-start justify-between" onclick="toggleRubricDetail(${idx})">
+          <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-lg transition-all flex items-start justify-between" onclick="window.toggleRubricDetail(${idx})">
             <div class="flex items-start gap-4 flex-1">
               <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center font-heading font-bold text-emerald-700 flex-shrink-0">${r.num}</div>
               <div>
@@ -470,13 +458,13 @@
               <div>
                 <h4 class="font-semibold text-sm text-slate-900 mb-4">👨‍🏫 Fiches Enseignant</h4>
                 <div class="space-y-2">
-                  ${r.files.prof.map(item => `<div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between"><div class="text-sm font-medium">${item.label}</div><button class="bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg" onclick="downloadSecureFile('prof_${item.label.toLowerCase().replace(/ /g, '_')}.pdf')">Prendre</button></div>`).join('')}
+                  ${r.files.prof.map(item => `<div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between"><div class="text-sm font-medium">${item.label}</div><button class="bg-emerald-50 text-emerald-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg" onclick="window.downloadSecureFile('prof_${item.label.toLowerCase().replace(/ /g, '_')}.pdf')">Prendre</button></div>`).join('')}
                 </div>
               </div>
               <div>
                 <h4 class="font-semibold text-sm text-slate-900 mb-4">👨‍🎓 Fiches Apprenant</h4>
                 <div class="space-y-2">
-                  ${r.files.apprenant.map(item => `<div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between"><div class="text-sm font-medium">${item.label}</div><button class="bg-blue-50 text-blue-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg" onclick="downloadSecureFile('apprenant_${item.label.toLowerCase().replace(/ /g, '_')}.pdf')">Prendre</button></div>`).join('')}
+                  ${r.files.apprenant.map(item => `<div class="bg-white border border-slate-200 rounded-lg p-3 flex items-center justify-between"><div class="text-sm font-medium">${item.label}</div><button class="bg-blue-50 text-blue-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg" onclick="window.downloadSecureFile('apprenant_${item.label.toLowerCase().replace(/ /g, '_')}.pdf')">Prendre</button></div>`).join('')}
                 </div>
               </div>
             </div>
@@ -484,13 +472,6 @@
         </div>
       `).join('');
       lucide.createIcons();
-    }
-
-    function toggleRubricDetail(idx) {
-      const detail = document.querySelector(`.rubric-detail-${idx}`);
-      const toggle = document.querySelector(`.rubric-toggle-${idx}`);
-      detail.classList.toggle('hidden');
-      if(toggle) toggle.style.transform = detail.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
     }
 
     function renderEvals(type) {
@@ -508,22 +489,15 @@
           </div>
           <div class="border-t border-slate-100 px-5 py-3 flex justify-between items-center">
             <span class="text-[11px] text-slate-400">📁 Trimestre ${e.trimestre}</span>
-            <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1" onclick="downloadSecureFile('${e.type}_trimestre_${e.trimestre}.pdf')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
+            <button class="bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1" onclick="window.downloadSecureFile('${e.type}_trimestre_${e.trimestre}.pdf')"><i data-lucide="download" class="w-3 h-3"></i> PDF</button>
           </div>
         </div>`).join('');
       lucide.createIcons();
     }
 
-    function setEvalFilter(type) {
-      document.querySelectorAll('.eval-filter-btn').forEach(b => { b.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-slate-200 text-slate-500 hover:border-slate-300 transition-all'; });
-      const btn = document.getElementById('ef-'+type);
-      if (btn) btn.className = 'eval-filter-btn px-4 py-2 rounded-lg text-sm font-medium border border-emerald-200 bg-emerald-50 text-emerald-700 transition-all active';
-      renderEvals(type);
-    }
-
     function renderDocs() {
       document.getElementById('docs-grid').innerHTML = DOCS.map(d => `
-        <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-md transition-all" onclick="showModal('${d.title}', '${d.desc}')">
+        <div class="bg-white border border-slate-200 rounded-xl p-5 cursor-pointer hover:shadow-md transition-all" onclick="window.showModal('${d.title}', '${d.desc}')">
           <div class="text-3xl mb-3">${d.icon}</div>
           <div class="font-semibold text-sm mb-2">${d.title}</div>
           <div class="text-xs text-slate-400 leading-relaxed mb-4">${d.desc}</div>
@@ -532,23 +506,18 @@
       lucide.createIcons();
     }
 
-    function showModal(title, desc) {
-      document.getElementById('modal-title').textContent = title;
-      document.getElementById('modal-desc').textContent = desc;
-      document.getElementById('modal').classList.remove('hidden');
-      document.getElementById('modal').classList.add('flex');
-    }
-    
-    function closeModal(e) { if (e.target === document.getElementById('modal')) { document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex'); } }
+    // 5. Initialisation automatique 
+    onAuthStateChanged(auth, (user) => {
+      const authScreen = document.getElementById('auth-screen');
+      if (user) {
+        authScreen.classList.add('hidden');
+        window.showToast("Accès validé : " + user.email);
+        renderProjectsGrid(); 
+      } else {
+        authScreen.classList.remove('hidden');
+      }
+    });
 
-    let toastTimer;
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      document.getElementById('toast-msg').textContent = msg;
-      t.style.transform = 'translateX(-50%) translateY(0)';
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { t.style.transform = 'translateX(-50%) translateY(80px)'; }, 3000);
-    }
   </script>
 </body>
 </html>
